@@ -1,0 +1,5143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IndianRail | National Railway Reservation System (NRRS)</title>
+  <meta name="description" content="IndianRail is a modern IndianRail railway reservation system homepage with fast train search and booking features.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #2e7d32;
+      --primary-dark: #1f5a23;
+      --primary-light: #e8f3e9;
+      --text: #17301d;
+      --muted: #5e7063;
+      --white: #ffffff;
+      --danger: #c62828;
+      --warning: #b26a00;
+      --surface: rgba(255, 255, 255, 0.92);
+      --surface-soft: rgba(245, 250, 246, 0.96);
+      --line: rgba(34, 84, 43, 0.1);
+      --line-strong: rgba(46, 125, 50, 0.18);
+      --shadow: 0 18px 45px rgba(16, 52, 25, 0.14);
+      --card-shadow: 0 16px 30px rgba(22, 44, 28, 0.1);
+      --shadow-soft: 0 12px 24px rgba(16, 52, 25, 0.08);
+      --shadow-card-hover: 0 24px 40px rgba(16, 52, 25, 0.14);
+      --radius-lg: 24px;
+      --radius-sm: 12px;
+      --container: 1180px;
+      --transition-base: 0.24s ease;
+      --control-height: 54px;
+      --surface-card: linear-gradient(180deg, rgba(255, 255, 255, 0.92) 0%, rgba(246, 250, 247, 0.9) 100%);
+      --surface-card-solid: linear-gradient(180deg, #ffffff 0%, #fbfdfb 100%);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 88px;
+    }
+
+    body {
+      font-family: "Poppins", sans-serif;
+      color: var(--text);
+      background: linear-gradient(180deg, #f6fbf7 0%, #ffffff 48%, #f3faf4 100%);
+      font-size: 16px;
+      line-height: 1.65;
+      letter-spacing: -0.01em;
+      -webkit-text-size-adjust: 100%;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      *,
+      *::before,
+      *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+    }
+
+    body.modal-open {
+      overflow: hidden;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button,
+    input,
+    select {
+      font: inherit;
+      min-width: 0;
+      touch-action: manipulation;
+    }
+
+    section[id] {
+      scroll-margin-top: 88px;
+    }
+
+    .container {
+      width: min(var(--container), calc(100% - 32px));
+      margin: 0 auto;
+    }
+
+    .navbar {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(34, 84, 43, 0.08);
+      box-shadow: 0 4px 18px rgba(17, 24, 39, 0.08);
+    }
+
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      min-height: 58px;
+      gap: 20px;
+      position: relative;
+    }
+
+    .brand {
+      font-size: 1.7rem;
+      font-weight: 800;
+      letter-spacing: 0.4px;
+      color: var(--primary);
+    }
+
+    .nav-toggle {
+      display: none;
+    }
+
+    .nav-toggle-label {
+      display: none;
+      width: 48px;
+      height: 48px;
+      border-radius: 14px;
+      border: 1px solid rgba(46, 125, 50, 0.16);
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: background 0.25s ease;
+    }
+
+    .nav-toggle-label:hover {
+      background: #f4faf4;
+    }
+
+    .nav-toggle-label span,
+    .nav-toggle-label span::before,
+    .nav-toggle-label span::after {
+      display: block;
+      width: 20px;
+      height: 2px;
+      background: var(--text);
+      border-radius: 999px;
+      position: relative;
+      transition: transform 0.25s ease, opacity 0.25s ease;
+    }
+
+    .nav-toggle-label span::before,
+    .nav-toggle-label span::after {
+      content: "";
+      position: absolute;
+      left: 0;
+    }
+
+    .nav-toggle-label span::before {
+      top: -6px;
+    }
+
+    .nav-toggle-label span::after {
+      top: 6px;
+    }
+
+    .nav-menu {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      list-style: none;
+    }
+
+    .nav-links a,
+    .nav-links button {
+      font-size: 0.96rem;
+      font-weight: 500;
+      color: #28412d;
+      padding: 10px 14px;
+      border-radius: 999px;
+      border: none;
+      background: transparent;
+      cursor: pointer;
+      transition: color 0.25s ease, background 0.25s ease;
+    }
+
+    .nav-links a:hover,
+    .nav-links a:focus-visible,
+    .nav-links button:hover,
+    .nav-links button:focus-visible {
+      color: var(--primary);
+      background: var(--primary-light);
+      outline: none;
+    }
+
+    .nav-user {
+      font-size: 0.92rem;
+      color: var(--muted);
+      font-weight: 600;
+      white-space: nowrap;
+    }
+
+    .hero {
+      position: relative;
+      min-height: 750px;
+      background:
+        linear-gradient(135deg, rgba(7, 24, 11, 0.78), rgba(22, 74, 34, 0.56)),
+        url("https://images.unsplash.com/photo-1474487548417-781cb71495f3?auto=format&fit=crop&w=1600&q=80") center/cover no-repeat;
+      color: var(--white);
+      overflow: hidden;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: auto -10% -140px auto;
+      width: 420px;
+      height: 420px;
+      background: radial-gradient(circle, rgba(120, 255, 156, 0), rgba(120, 255, 156, 0));
+      pointer-events: none;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 124px 0 220px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 16px;
+      margin-bottom: 22px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(10px);
+      font-size: 0.9rem;
+      font-weight: 500;
+      letter-spacing: 0.03em;
+    }
+
+    .hero h1 {
+      max-width: 820px;
+      font-size: clamp(2.6rem, 6vw, 4.9rem);
+      font-weight: 800;
+      line-height: 1.08;
+      letter-spacing: -0.03em;
+      text-shadow: 0 10px 30px rgba(0, 0, 0, 0.18);
+    }
+
+    .hero p {
+      margin-top: 18px;
+      font-size: clamp(1rem, 2vw, 1.25rem);
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.88);
+    }
+
+    .search-wrap {
+      position: relative;
+      z-index: 2;
+      margin-top: -110px;
+    }
+
+    .search-card,
+    .results-card,
+    .tickets-panel,
+    .feature-card,
+    .modal-panel {
+      border: 1px solid rgba(255, 255, 255, 0.52);
+      border-radius: var(--radius-lg);
+      background: var(--surface-card);
+      backdrop-filter: blur(18px);
+      box-shadow: var(--shadow);
+      transition: transform var(--transition-base), box-shadow var(--transition-base), border-color var(--transition-base), background var(--transition-base);
+    }
+
+    .search-card {
+      padding: 30px;
+    }
+
+    .search-header,
+    .panel-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      margin-bottom: 24px;
+    }
+
+    .search-header h2,
+    .panel-header h2,
+    .section-intro h2 {
+      font-size: clamp(1.35rem, 2.4vw, 2rem);
+      font-weight: 700;
+      line-height: 1.14;
+      letter-spacing: -0.03em;
+      color: var(--text);
+    }
+
+    .search-header span,
+    .panel-header p,
+    .section-intro p,
+    .empty-state p,
+    .result-meta,
+    .ticket-meta,
+    .helper-text {
+      color: var(--muted);
+      font-size: clamp(0.94rem, 0.18vw + 0.91rem, 1rem);
+      line-height: 1.6;
+    }
+
+    .panel-header p,
+    .ticket-meta,
+    .result-meta,
+    .helper-text {
+      overflow-wrap: anywhere;
+    }
+
+    .search-header span,
+    .panel-header p,
+    .section-intro p {
+      max-width: 48ch;
+    }
+
+    .booking-form {
+      display: grid;
+      grid-template-columns: 1.1fr 1.1fr 0.9fr auto;
+      gap: 18px;
+      align-items: end;
+    }
+
+    .field {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      position: relative;
+    }
+
+    .field label {
+      font-size: 0.92rem;
+      font-weight: 700;
+      letter-spacing: 0.01em;
+      color: #26402b;
+    }
+
+    .field input,
+    .field select {
+      width: 100%;
+      height: var(--control-height);
+      border: 1px solid rgba(46, 125, 50, 0.16);
+      border-radius: 14px;
+      padding: 0 18px;
+      background: rgba(255, 255, 255, 0.92);
+      color: var(--text);
+      box-shadow: inset 0 1px 2px rgba(10, 32, 16, 0.04);
+      transition: border-color var(--transition-base), box-shadow var(--transition-base), transform var(--transition-base), background var(--transition-base);
+    }
+
+    .field input::placeholder {
+      color: #8b9c8f;
+    }
+
+    .field input:focus,
+    .field select:focus {
+      outline: none;
+      border-color: rgba(46, 125, 50, 0.55);
+      box-shadow: 0 0 0 4px rgba(46, 125, 50, 0.12);
+      transform: translateY(-1px);
+    }
+
+    .primary-btn,
+    .secondary-btn,
+    .ghost-btn,
+    .danger-btn {
+      min-height: var(--control-height);
+      height: var(--control-height);
+      border: none;
+      border-radius: 14px;
+      padding: 0 22px;
+      font-weight: 700;
+      font-size: 0.98rem;
+      letter-spacing: 0.01em;
+      cursor: pointer;
+      position: relative;
+      isolation: isolate;
+      transition: transform var(--transition-base), box-shadow var(--transition-base), background var(--transition-base), color var(--transition-base), opacity var(--transition-base);
+    }
+
+    .primary-btn {
+      background: linear-gradient(135deg, var(--primary), #3e9c42);
+      color: var(--white);
+      box-shadow: 0 14px 24px rgba(46, 125, 50, 0.28);
+    }
+
+    .primary-btn:hover,
+    .primary-btn:focus-visible {
+      transform: translateY(-2px);
+      box-shadow: 0 18px 30px rgba(46, 125, 50, 0.34);
+      outline: none;
+    }
+
+    .primary-btn:active,
+    .secondary-btn:active,
+    .ghost-btn:active,
+    .danger-btn:active,
+    .quick-date-btn:active,
+    .filter-pill:active,
+    .date-pill:active,
+    .auth-tab:active,
+    .ticket-type-option:active,
+    .drawer-summary:active,
+    .nav-links a:active,
+    .nav-links button:active {
+      transform: translateY(1px) scale(0.99);
+    }
+
+    .secondary-btn {
+      background: rgba(46, 125, 50, 0.1);
+      color: var(--primary);
+      box-shadow: inset 0 0 0 1px rgba(46, 125, 50, 0.06);
+    }
+
+    .ghost-btn {
+      background: rgba(24, 65, 33, 0.06);
+      color: var(--text);
+      box-shadow: inset 0 0 0 1px rgba(24, 65, 33, 0.05);
+    }
+
+    .danger-btn {
+      background: rgba(198, 40, 40, 0.1);
+      color: var(--danger);
+      box-shadow: inset 0 0 0 1px rgba(198, 40, 40, 0.05);
+    }
+
+    .secondary-btn:hover,
+    .secondary-btn:focus-visible,
+    .ghost-btn:hover,
+    .ghost-btn:focus-visible,
+    .danger-btn:hover,
+    .danger-btn:focus-visible {
+      transform: translateY(-2px);
+      outline: none;
+      box-shadow: 0 14px 28px rgba(16, 52, 25, 0.1);
+    }
+
+    .primary-btn[disabled],
+    .secondary-btn[disabled],
+    .ghost-btn[disabled],
+    .danger-btn[disabled],
+    .auth-tab[disabled] {
+      opacity: 0.72;
+      cursor: not-allowed;
+      box-shadow: none;
+      transform: none;
+    }
+
+    .primary-btn[data-loading="true"],
+    .secondary-btn[data-loading="true"],
+    .ghost-btn[data-loading="true"],
+    .danger-btn[data-loading="true"] {
+      padding-right: 48px;
+    }
+
+    .primary-btn[data-loading="true"]::after,
+    .secondary-btn[data-loading="true"]::after,
+    .ghost-btn[data-loading="true"]::after,
+    .danger-btn[data-loading="true"]::after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      right: 18px;
+      width: 16px;
+      height: 16px;
+      margin-top: -8px;
+      border-radius: 50%;
+      border: 2px solid currentColor;
+      border-right-color: transparent;
+      animation: button-spin 0.72s linear infinite;
+    }
+
+    @keyframes button-spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    .status-banner {
+      display: none;
+      margin-top: 18px;
+      padding: 14px 16px;
+      border-radius: 16px;
+      font-weight: 600;
+      overflow-wrap: anywhere;
+    }
+
+    .status-banner.show {
+      display: block;
+    }
+
+    .status-banner.success {
+      background: rgba(46, 125, 50, 0.12);
+      color: var(--primary-dark);
+    }
+
+    .status-banner.error {
+      background: rgba(198, 40, 40, 0.12);
+      color: var(--danger);
+    }
+
+    .status-banner.info {
+      background: rgba(46, 125, 50, 0.08);
+      color: var(--text);
+    }
+
+    .search-tools,
+    .tickets-toolbar {
+      display: grid;
+      gap: 16px;
+      margin-top: 18px;
+    }
+
+    .quick-dates,
+    .filter-pills,
+    .available-dates {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .quick-date-btn,
+    .filter-pill,
+    .date-pill {
+      min-height: 44px;
+      padding: 0 16px;
+      border-radius: 999px;
+      border: 1px solid rgba(46, 125, 50, 0.15);
+      background: rgba(255, 255, 255, 0.88);
+      color: var(--text);
+      font-weight: 600;
+      cursor: pointer;
+      flex: 0 0 auto;
+      transition: transform var(--transition-base), background var(--transition-base), color var(--transition-base), border-color var(--transition-base), box-shadow var(--transition-base);
+    }
+
+    .quick-date-btn:hover,
+    .filter-pill:hover,
+    .date-pill:hover {
+      border-color: rgba(46, 125, 50, 0.28);
+      transform: translateY(-1px);
+    }
+
+    .quick-date-btn.active,
+    .filter-pill.active,
+    .date-pill.active {
+      background: var(--primary);
+      color: var(--white);
+      box-shadow: 0 12px 24px rgba(46, 125, 50, 0.2);
+    }
+
+    .route-insights {
+      display: grid;
+      gap: 12px;
+      padding: 0;
+      border-radius: 18px;
+      background: transparent;
+      border: none;
+    }
+
+    .insight-title {
+      font-size: 0.92rem;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .search-support-panel,
+    .insights-drawer,
+    .info-drawer {
+      border-radius: 18px;
+      border: 1px solid var(--line);
+      background: var(--surface-soft);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.35);
+      overflow: hidden;
+    }
+
+    .search-support-panel {
+      display: grid;
+      gap: 12px;
+      padding: 18px;
+    }
+
+    .quick-dates-drawer .drawer-content {
+      padding: 0;
+      border-top: none;
+    }
+
+    .drawer-summary {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 16px 18px;
+      cursor: pointer;
+      list-style: none;
+      transition: background var(--transition-base), color var(--transition-base);
+    }
+
+    .drawer-summary:hover,
+    .drawer-summary:focus-visible {
+      background: rgba(46, 125, 50, 0.06);
+      outline: none;
+    }
+
+    .drawer-summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .drawer-summary-main {
+      flex: 1;
+      min-width: 0;
+      display: grid;
+      gap: 2px;
+    }
+
+    .drawer-summary-title {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .drawer-meta {
+      color: var(--muted);
+      font-size: 0.88rem;
+      overflow-wrap: anywhere;
+    }
+
+    .drawer-chevron {
+      width: 10px;
+      height: 10px;
+      flex: 0 0 auto;
+      border-right: 2px solid rgba(23, 48, 29, 0.72);
+      border-bottom: 2px solid rgba(23, 48, 29, 0.72);
+      transform: rotate(45deg);
+      transition: transform var(--transition-base);
+      margin-top: -4px;
+    }
+
+    .insights-drawer[open] > .drawer-summary .drawer-chevron,
+    .info-drawer[open] > .drawer-summary .drawer-chevron {
+      transform: rotate(225deg);
+      margin-top: 4px;
+    }
+
+    .drawer-content {
+      padding: 0 18px 18px;
+      border-top: 1px solid var(--line);
+      animation: drawer-in 0.24s ease;
+    }
+
+    @keyframes drawer-in {
+      from {
+        opacity: 0;
+        transform: translateY(-6px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .insight-metrics {
+      margin: 14px 0 2px;
+    }
+
+    .suggest-list {
+      position: absolute;
+      top: calc(100% + 8px);
+      left: 0;
+      right: 0;
+      z-index: 25;
+      display: none;
+      overflow: hidden;
+      border-radius: 18px;
+      background: rgba(255, 255, 255, 0.98);
+      border: 1px solid rgba(46, 125, 50, 0.14);
+      box-shadow: 0 20px 36px rgba(15, 23, 42, 0.12);
+    }
+
+    .suggest-list.show {
+      display: block;
+    }
+
+    .suggest-item {
+      width: 100%;
+      padding: 14px 16px;
+      border: none;
+      background: transparent;
+      text-align: left;
+      cursor: pointer;
+      color: var(--text);
+      font-weight: 500;
+    }
+
+    .suggest-item:hover,
+    .suggest-item:focus-visible {
+      background: rgba(46, 125, 50, 0.08);
+      outline: none;
+    }
+
+    .journey-strip {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 12px;
+    }
+
+    .journey-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 14px;
+      border-radius: 14px;
+      background: rgba(46, 125, 50, 0.08);
+      color: var(--primary-dark);
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+
+    .results-section,
+    .tickets-section,
+    .features {
+      padding: 52px 0 0;
+    }
+
+    .results-card,
+    .tickets-panel {
+      padding: 30px;
+    }
+
+    .results-list,
+    .tickets-list {
+      display: grid;
+      gap: 20px;
+    }
+
+    .result-item,
+    .ticket-item {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 22px;
+      padding: 24px;
+      border-radius: 22px;
+      background: var(--surface-card-solid);
+      box-shadow: var(--card-shadow);
+      border: 1px solid rgba(34, 84, 43, 0.07);
+      transition: transform var(--transition-base), box-shadow var(--transition-base), border-color var(--transition-base);
+    }
+
+    .card-main {
+      display: grid;
+      gap: 20px;
+      min-width: 0;
+    }
+
+    .result-top,
+    .ticket-top {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .result-top > div,
+    .ticket-top > div {
+      min-width: 0;
+      flex: 1 1 240px;
+    }
+
+    .result-title,
+    .ticket-title {
+      font-size: clamp(1.14rem, 0.45vw + 1rem, 1.34rem);
+      font-weight: 700;
+      line-height: 1.24;
+      overflow-wrap: anywhere;
+    }
+
+    .primary-meta {
+      color: var(--muted);
+      font-size: 0.94rem;
+      font-weight: 600;
+      overflow-wrap: anywhere;
+    }
+
+    .route-line {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+      gap: 16px;
+      align-items: center;
+      padding: 18px 20px;
+      border-radius: 20px;
+      background: linear-gradient(180deg, rgba(248, 252, 249, 0.96), rgba(240, 247, 242, 0.98));
+      border: 1px solid var(--line);
+    }
+
+    .time-block {
+      display: grid;
+      gap: 4px;
+      min-width: 0;
+    }
+
+    .time-block.align-end {
+      text-align: right;
+    }
+
+    .time-label {
+      font-size: 1.12rem;
+      font-weight: 700;
+      color: var(--text);
+      overflow-wrap: anywhere;
+    }
+
+    .station-label {
+      color: var(--muted);
+      font-size: 0.9rem;
+      overflow-wrap: anywhere;
+    }
+
+    .connector {
+      display: grid;
+      justify-items: center;
+      gap: 8px;
+      min-width: 70px;
+      color: var(--muted);
+    }
+
+    .connector::before,
+    .connector::after {
+      content: "";
+      width: 68px;
+      height: 1px;
+      background: rgba(46, 125, 50, 0.2);
+    }
+
+    .connector span {
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .summary-metrics {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .summary-metric {
+      min-width: 0;
+      min-height: 92px;
+      display: grid;
+      align-content: start;
+      gap: 4px;
+      padding: 16px 18px;
+      border-radius: 18px;
+      background: var(--surface-soft);
+      border: 1px solid var(--line);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4);
+    }
+
+    .summary-metric strong {
+      display: block;
+      color: var(--text);
+      font-size: 1rem;
+      font-weight: 700;
+      overflow-wrap: anywhere;
+    }
+
+    .summary-metric.emphasis strong {
+      font-size: 1.12rem;
+      color: var(--primary-dark);
+    }
+
+    .metric-label {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #6d7e71;
+    }
+
+    .detail-grid {
+      gap: 14px 16px;
+      margin-top: 16px;
+    }
+
+    .detail-grid > * {
+      padding: 14px 16px;
+      border-radius: 16px;
+      background: var(--white);
+      border: 1px solid rgba(34, 84, 43, 0.08);
+      box-shadow: var(--shadow-soft);
+    }
+
+    .detail-item {
+      padding: 14px;
+      border-radius: 14px;
+      background: var(--white);
+      border: 1px solid rgba(34, 84, 43, 0.08);
+      box-shadow: var(--shadow-soft);
+    }
+
+    .detail-heading {
+      display: block;
+      margin-bottom: 6px;
+      color: var(--text);
+      font-size: 0.9rem;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+    }
+
+    .detail-value {
+      color: var(--muted);
+      font-size: 0.92rem;
+      font-weight: 600;
+      overflow-wrap: anywhere;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 34px;
+      padding: 6px 12px;
+      border-radius: 999px;
+      font-size: 0.82rem;
+      font-weight: 700;
+    }
+
+    .badge.available,
+    .badge.confirmed {
+      background: rgba(46, 125, 50, 0.12);
+      color: var(--primary-dark);
+    }
+
+    .badge.waiting {
+      background: rgba(178, 106, 0, 0.12);
+      color: var(--warning);
+    }
+
+    .badge.cancelled {
+      background: rgba(198, 40, 40, 0.12);
+      color: var(--danger);
+    }
+
+    .meta-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px 24px;
+      margin-top: 12px;
+    }
+
+    .meta-grid strong {
+      display: block;
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #6d7e71;
+      margin-bottom: 4px;
+    }
+
+    .item-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      justify-content: center;
+      min-width: 170px;
+    }
+
+    .ticket-actions {
+      align-items: stretch;
+    }
+
+    .desktop-ticket-action {
+      display: none;
+    }
+
+    .ticket-action-menu {
+      display: inline-flex;
+      align-self: stretch;
+    }
+
+    .mobile-action-menu {
+      position: relative;
+      display: inline-flex;
+      width: 100%;
+    }
+
+    .mobile-action-toggle {
+      width: 100%;
+      min-height: 48px;
+      padding: 0 16px;
+      border-radius: 14px;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .mobile-action-toggle span {
+      font-size: 1.2rem;
+      line-height: 1;
+      pointer-events: none;
+      transform: translateY(-1px);
+    }
+
+    .mobile-action-dropdown {
+      position: absolute;
+      right: 0;
+      bottom: calc(100% + 8px);
+      z-index: 40;
+      min-width: min(220px, 90vw);
+      display: grid;
+      gap: 4px;
+      padding: 8px;
+      border-radius: 16px;
+      border: 1px solid rgba(34, 84, 43, 0.1);
+      background: rgba(255, 255, 255, 0.98);
+      box-shadow: 0 20px 34px rgba(10, 21, 13, 0.14);
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(6px);
+      transition: opacity var(--transition-base), transform var(--transition-base);
+    }
+
+    .mobile-action-menu.is-open .mobile-action-dropdown {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateY(0);
+    }
+
+    .mobile-action-item {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      gap: 10px;
+      min-height: 42px;
+      padding: 10px 12px;
+      border: none;
+      border-radius: 10px;
+      background: transparent;
+      color: var(--text);
+      text-decoration: none;
+      font-weight: 600;
+      text-align: left;
+      cursor: pointer;
+    }
+
+    .mobile-action-item:hover,
+    .mobile-action-item:focus-visible {
+      background: rgba(46, 125, 50, 0.08);
+      outline: none;
+    }
+
+    .quick-date-btn:focus-visible,
+    .filter-pill:focus-visible,
+    .date-pill:focus-visible,
+    .mobile-action-toggle:focus-visible,
+    .ticket-type-option:focus-visible {
+      outline: none;
+      box-shadow: 0 0 0 4px rgba(46, 125, 50, 0.12);
+    }
+
+    .mobile-action-item.danger {
+      color: var(--danger);
+    }
+
+    .mobile-action-item:disabled {
+      opacity: 0.62;
+      cursor: not-allowed;
+    }
+
+    .empty-state {
+      display: grid;
+      gap: 10px;
+      justify-items: center;
+      padding: 36px 18px;
+      text-align: center;
+      border-radius: 20px;
+      background: rgba(46, 125, 50, 0.05);
+      border: 1px dashed rgba(46, 125, 50, 0.2);
+    }
+
+    .empty-state-icon {
+      width: 54px;
+      height: 54px;
+      display: grid;
+      place-items: center;
+      border-radius: 18px;
+      background: rgba(255, 255, 255, 0.9);
+      box-shadow: inset 0 0 0 1px rgba(46, 125, 50, 0.1);
+      color: var(--primary);
+      font-size: 0.95rem;
+      font-weight: 800;
+      letter-spacing: 0.14em;
+    }
+
+    .empty-state-title {
+      font-size: 1.08rem;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .empty-state-hint {
+      color: var(--muted);
+      font-size: 0.9rem;
+      max-width: 42ch;
+    }
+
+    .skeleton-card {
+      display: grid;
+      gap: 14px;
+      padding: 22px;
+      border-radius: 20px;
+      background: rgba(255, 255, 255, 0.92);
+      box-shadow: var(--card-shadow);
+    }
+
+    .skeleton-line {
+      height: 14px;
+      border-radius: 999px;
+      background: linear-gradient(90deg, rgba(226, 239, 228, 0.9), rgba(245, 250, 246, 1), rgba(226, 239, 228, 0.9));
+      background-size: 200% 100%;
+      animation: shimmer 1.2s infinite linear;
+    }
+
+    .skeleton-line.short {
+      width: 32%;
+    }
+
+    .skeleton-line.medium {
+      width: 58%;
+    }
+
+    .skeleton-line.long {
+      width: 84%;
+    }
+
+    @keyframes shimmer {
+      0% {
+        background-position: 200% 0;
+      }
+
+      100% {
+        background-position: -200% 0;
+      }
+    }
+
+    .toast-stack {
+      position: fixed;
+      right: 20px;
+      bottom: 20px;
+      z-index: 1400;
+      display: grid;
+      gap: 12px;
+      width: min(360px, calc(100% - 40px));
+    }
+
+    .toast {
+      padding: 14px 16px;
+      border-radius: 16px;
+      color: var(--white);
+      box-shadow: 0 16px 32px rgba(10, 21, 13, 0.22);
+      animation: toast-in 0.2s ease;
+      overflow-wrap: anywhere;
+    }
+
+    .toast.success {
+      background: #1f5a23;
+    }
+
+    .toast.error {
+      background: #8d1f1f;
+    }
+
+    .toast.info {
+      background: #17301d;
+    }
+
+    @media (hover: hover) {
+      .result-item:hover,
+      .ticket-item:hover {
+        transform: translateY(-3px);
+        box-shadow: var(--shadow-card-hover);
+        border-color: rgba(46, 125, 50, 0.14);
+      }
+    }
+
+    @keyframes toast-in {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .features {
+      padding-bottom: 80px;
+    }
+
+    .section-intro {
+      text-align: center;
+      max-width: 760px;
+      margin: 0 auto 52px;
+    }
+
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 28px;
+    }
+
+    .feature-card {
+      display: grid;
+      gap: 14px;
+      padding: 30px;
+      background: var(--surface-card-solid);
+      box-shadow: var(--card-shadow);
+      border: 1px solid rgba(34, 84, 43, 0.07);
+      transition: transform 0.28s ease, box-shadow 0.28s ease;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 24px 34px rgba(18, 45, 25, 0.14);
+    }
+
+    .feature-icon {
+      width: 64px;
+      height: 64px;
+      display: grid;
+      place-items: center;
+      margin-bottom: 20px;
+      border-radius: 18px;
+      background: linear-gradient(135deg, #e4f5e6, #f5fcf6);
+      color: var(--primary);
+      box-shadow: inset 0 0 0 1px rgba(46, 125, 50, 0.08);
+    }
+
+    .feature-card h3 {
+      font-size: 1.25rem;
+      color: var(--text);
+    }
+
+    .feature-card p {
+      color: var(--muted);
+      font-size: 0.97rem;
+    }
+
+    .footer {
+      padding: 28px 0 38px;
+      text-align: center;
+      color: #6f8173;
+      font-size: 0.92rem;
+    }
+
+    .footer p {
+      max-width: 52ch;
+      margin: 0 auto;
+    }
+
+    .modal {
+      position: fixed;
+      inset: 0;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      background: rgba(10, 21, 13, 0.6);
+      z-index: 1200;
+    }
+
+    .modal.show {
+      display: flex;
+      animation: modal-fade 0.22s ease;
+    }
+
+    .modal.show .modal-panel {
+      animation: modal-pop 0.26s ease;
+    }
+
+    #bookingModal.show .modal-panel {
+      animation: booking-sheet-rise 0.28s ease;
+    }
+
+    @keyframes modal-fade {
+      from {
+        opacity: 0;
+      }
+
+      to {
+        opacity: 1;
+      }
+    }
+
+    @keyframes modal-pop {
+      from {
+        opacity: 0;
+        transform: translateY(16px) scale(0.98);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    @keyframes booking-sheet-rise {
+      from {
+        opacity: 0;
+        transform: translateY(28px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .modal-panel {
+      width: min(460px, 100%);
+      padding: 28px;
+      background: rgba(255, 255, 255, 0.95);
+      overscroll-behavior: contain;
+    }
+
+    #bookingModal {
+      padding: 0;
+      align-items: flex-end;
+      overflow: hidden;
+    }
+
+    #bookingModal .modal-panel {
+      width: 100%;
+      max-width: 100%;
+      height: 100vh;
+      max-height: 100vh;
+      min-height: 100vh;
+      height: 100dvh;
+      max-height: 100dvh;
+      min-height: 100dvh;
+      margin: 0 auto;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      overflow-x: hidden;
+      border-radius: 0;
+    }
+
+    #bookingModal .modal-header {
+      margin-bottom: 0;
+      padding: 20px 20px 16px;
+      border-bottom: 1px solid rgba(46, 125, 50, 0.12);
+      background: rgba(255, 255, 255, 0.97);
+      position: sticky;
+      top: 0;
+      z-index: 3;
+    }
+
+    #bookingModal .modal-header h2 {
+      font-size: clamp(1.2rem, 4.6vw, 1.55rem);
+      line-height: 1.2;
+    }
+
+    .booking-modal-body {
+      flex: 1;
+      min-height: 0;
+      overflow-y: auto;
+      overflow-x: hidden;
+      padding: 18px 20px 16px;
+      overscroll-behavior: contain;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .booking-modal-body .confirmation-content {
+      margin-top: 0;
+      gap: 14px;
+    }
+
+    .booking-modal-body .confirmation-content p {
+      overflow-wrap: anywhere;
+    }
+
+    .booking-modal-body .auth-form,
+    .booking-sheet-form {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      margin-top: 18px;
+    }
+
+    .booking-modal-body .field {
+      gap: 8px;
+    }
+
+    .booking-modal-body .field input,
+    .booking-modal-body .field select {
+      width: 100%;
+      box-sizing: border-box;
+      min-height: 56px;
+      padding-inline: 16px;
+      font-size: 16px;
+    }
+
+    .booking-modal-body .meta-grid {
+      grid-template-columns: 1fr;
+      gap: 12px;
+      margin-top: 16px;
+    }
+
+    .ticket-type-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      width: 100%;
+    }
+
+    .ticket-type-option {
+      width: 100%;
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 14px 16px;
+      min-height: 72px;
+      border: 1px solid rgba(46, 125, 50, 0.16);
+      border-radius: 14px;
+      background: rgba(255, 255, 255, 0.9);
+      color: var(--text);
+      cursor: pointer;
+      text-align: left;
+      transition: border-color 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .ticket-type-option:hover,
+    .ticket-type-option:focus-visible {
+      outline: none;
+      border-color: rgba(46, 125, 50, 0.35);
+      box-shadow: 0 10px 18px rgba(16, 52, 25, 0.08);
+    }
+
+    .ticket-type-option.selected {
+      border-color: rgba(46, 125, 50, 0.58);
+      background: rgba(46, 125, 50, 0.08);
+    }
+
+    .ticket-type-option-name {
+      font-weight: 700;
+      letter-spacing: 0.04em;
+    }
+
+    .ticket-type-option-meta {
+      color: var(--muted);
+      font-size: 0.92rem;
+      text-align: left;
+      white-space: normal;
+    }
+
+    .booking-modal-body .status-banner {
+      margin-top: 18px;
+    }
+
+    .booking-modal-actions {
+      padding: 14px 20px calc(14px + env(safe-area-inset-bottom, 0px));
+      border-top: 1px solid rgba(46, 125, 50, 0.12);
+      background: rgba(255, 255, 255, 0.96);
+      position: sticky;
+      bottom: 0;
+      z-index: 3;
+    }
+
+    .booking-modal-actions .item-actions {
+      margin-top: 0;
+      min-width: 0;
+      width: 100%;
+    }
+
+    .booking-modal-actions .primary-btn,
+    .booking-modal-actions .secondary-btn,
+    .booking-modal-actions .ghost-btn {
+      width: 100%;
+    }
+
+    .booking-sheet-summary {
+      display: grid;
+      gap: 14px;
+      padding: 18px;
+      border-radius: 20px;
+      background: linear-gradient(180deg, rgba(245, 250, 246, 0.96), rgba(255, 255, 255, 0.98));
+      border: 1px solid var(--line);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.45);
+    }
+
+    .booking-sheet-form .field label,
+    .ticket-type-group-label {
+      font-size: 0.92rem;
+      font-weight: 700;
+      color: #26402b;
+    }
+
+    .ticket-type-group {
+      display: grid;
+      gap: 10px;
+    }
+
+    .modal-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 22px;
+    }
+
+    .modal-close {
+      width: 40px;
+      height: 40px;
+      border-radius: 999px;
+      border: none;
+      background: rgba(24, 65, 33, 0.06);
+      font-size: 1.3rem;
+      cursor: pointer;
+      transition: background var(--transition-base), transform var(--transition-base);
+    }
+
+    .modal-close:hover,
+    .modal-close:focus-visible {
+      background: rgba(46, 125, 50, 0.12);
+      outline: none;
+    }
+
+    .auth-tabs {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: nowrap;
+      justify-content: center;
+      align-items: stretch;
+      gap: 10px;
+      margin-bottom: 18px;
+      overflow-x: auto;
+      overscroll-behavior-x: contain;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .auth-tab {
+      flex: 1 1 0;
+      width: auto;
+      min-width: 0;
+      height: 48px;
+      padding: 0 14px;
+      border-radius: 14px;
+      border: none;
+      background: rgba(46, 125, 50, 0.08);
+      color: var(--muted);
+      font-weight: 700;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+
+    .auth-tab.active {
+      background: var(--primary);
+      color: var(--white);
+    }
+
+    .auth-form {
+      display: none;
+      gap: 14px;
+      flex-direction: column;
+    }
+
+    .auth-form.active {
+      display: flex;
+    }
+
+    .auth-form .field input,
+    .auth-form .field select {
+      height: 54px;
+    }
+
+    .confirmation-content {
+      display: grid;
+      gap: 10px;
+      margin-top: 12px;
+    }
+
+    .confirmation-content p {
+      padding: 12px 14px;
+      border-radius: 14px;
+      background: var(--surface-soft);
+      border: 1px solid var(--line);
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    .reveal-on-scroll {
+      opacity: 0;
+      transform: translateY(18px);
+      transition:
+        opacity 0.48s ease var(--reveal-delay, 0ms),
+        transform 0.48s cubic-bezier(0.2, 0.8, 0.2, 1) var(--reveal-delay, 0ms);
+    }
+
+    .reveal-on-scroll.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (max-width: 980px) {
+      .hero {
+        min-height: 660px;
+      }
+
+      .booking-form,
+      .feature-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .result-item,
+      .ticket-item {
+        grid-template-columns: 1fr;
+      }
+
+      .item-actions {
+        flex-direction: row;
+        min-width: 0;
+      }
+    }
+
+    @media (max-width: 760px) {
+      .nav-toggle-label {
+        display: inline-flex;
+      }
+
+      .nav-menu {
+        position: absolute;
+        top: 78px;
+        left: 0;
+        right: 0;
+        display: block;
+        background: rgba(255, 255, 255, 0.98);
+        box-shadow: 0 16px 30px rgba(15, 23, 42, 0.08);
+        border-top: 1px solid rgba(0, 0, 0, 0.05);
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(-10px);
+        transition: opacity 0.25s ease, visibility 0.25s ease, transform 0.25s ease;
+      }
+
+      .nav-links {
+        flex-direction: column;
+        align-items: stretch;
+        padding: 16px;
+        gap: 8px;
+      }
+
+      .nav-user {
+        padding: 0 16px 16px;
+      }
+
+      .nav-toggle:checked + .nav-toggle-label span {
+        background: transparent;
+      }
+
+      .nav-toggle:checked + .nav-toggle-label span::before {
+        transform: translateY(6px) rotate(45deg);
+      }
+
+      .nav-toggle:checked + .nav-toggle-label span::after {
+        transform: translateY(-6px) rotate(-45deg);
+      }
+
+      .nav-toggle:checked ~ .nav-menu {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+      }
+
+      .hero-content {
+        padding: 92px 0 200px;
+      }
+
+      .search-wrap {
+        margin-top: -88px;
+      }
+
+      .search-card,
+      .results-card,
+      .tickets-panel,
+      .modal-panel {
+        padding: 22px;
+      }
+
+      #bookingModal .modal-panel {
+        padding: 0;
+      }
+
+      #bookingModal .modal-header {
+        padding: 22px 22px 16px;
+      }
+
+      .booking-modal-body {
+        padding: 18px 22px 14px;
+      }
+
+      .booking-modal-actions {
+        padding: 16px 22px 22px;
+      }
+
+      .ticket-type-option {
+        align-items: flex-start;
+      }
+
+      .search-header,
+      .panel-header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .booking-form,
+      .feature-grid,
+      .meta-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .item-actions {
+        flex-direction: column;
+      }
+
+      .summary-metrics {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .summary-metric.emphasis {
+        grid-column: 1 / -1;
+      }
+
+      .route-line {
+        grid-template-columns: 1fr;
+        justify-items: start;
+      }
+
+      .time-block.align-end {
+        text-align: left;
+      }
+
+      .connector {
+        justify-items: start;
+      }
+
+      .connector::before,
+      .connector::after {
+        width: 44px;
+      }
+    }
+
+    @media (max-width: 560px) {
+      .container {
+        width: min(var(--container), calc(100% - 20px));
+      }
+
+      .nav-inner {
+        min-height: 72px;
+      }
+
+      .brand {
+        font-size: 1.45rem;
+      }
+
+      .hero {
+        min-height: 600px;
+      }
+
+      .eyebrow {
+        font-size: 0.8rem;
+        margin-bottom: 18px;
+      }
+
+      .hero p {
+        letter-spacing: 0.08em;
+      }
+
+      .search-wrap {
+        margin-top: -72px;
+      }
+
+      .results-section,
+      .tickets-section,
+      .features {
+        padding-top: 34px;
+      }
+
+      .primary-btn,
+      .secondary-btn,
+      .ghost-btn,
+      .danger-btn {
+        width: 100%;
+      }
+
+      .ticket-type-option {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .ticket-type-option-meta {
+        text-align: left;
+        white-space: normal;
+      }
+    }
+
+    /* Responsive hardening: mobile-first without changing the visual design */
+    :root {
+      --page-gutter: 12px;
+      --section-gap: 38px;
+      --card-padding: 20px;
+      --hero-min-height: 620px;
+    }
+
+    html {
+      overflow-x: hidden;
+    }
+
+    body {
+      overflow-x: clip;
+    }
+
+    img,
+    svg {
+      max-width: 100%;
+      height: auto;
+    }
+
+    @media (min-width: 320px) {
+      :root {
+        --page-gutter: 12px;
+      }
+    }
+
+    .container {
+      width: 100%;
+      max-width: var(--container);
+      padding-inline: var(--page-gutter);
+      margin-inline: auto;
+    }
+
+    .brand,
+    .field,
+    .booking-form > *,
+    .result-item > *,
+    .ticket-item > * {
+      min-width: 0;
+    }
+
+    .nav-inner {
+      min-height: 72px;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .nav-toggle-label {
+      display: inline-flex;
+      margin-left: auto;
+      flex: 0 0 auto;
+    }
+
+    .nav-menu {
+      position: absolute;
+      top: calc(100% + 8px);
+      left: var(--page-gutter);
+      right: var(--page-gutter);
+      display: block;
+      padding: 10px;
+      border-radius: 20px;
+      border: 1px solid rgba(0, 0, 0, 0.05);
+      background: rgba(255, 255, 255, 0.98);
+      box-shadow: 0 16px 30px rgba(15, 23, 42, 0.08);
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-10px);
+      transition: opacity 0.25s ease, visibility 0.25s ease, transform 0.25s ease;
+    }
+
+    .nav-links {
+      flex-direction: column;
+      align-items: stretch;
+      padding: 0;
+      gap: 10px;
+    }
+
+    .nav-links a,
+    .nav-links button,
+    .primary-btn,
+    .secondary-btn,
+    .ghost-btn,
+    .danger-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      max-width: 100%;
+      text-decoration: none;
+    }
+
+    .nav-links a,
+    .nav-links button {
+      width: 100%;
+      justify-content: flex-start;
+      padding: 12px 14px;
+    }
+
+    .nav-user {
+      width: 100%;
+      padding: 0 6px 10px;
+      white-space: normal;
+      overflow-wrap: anywhere;
+    }
+
+    .hero h1,
+    .section-intro h2,
+    .search-header h2,
+    .panel-header h2 {
+      overflow-wrap: anywhere;
+    }
+
+    .hero {
+      min-height: var(--hero-min-height);
+    }
+
+    .hero::after {
+      inset: auto -6% -96px auto;
+      width: 240px;
+      height: 240px;
+    }
+
+    .hero-content {
+      padding: 98px 0 178px;
+    }
+
+    .search-wrap {
+      margin-top: -82px;
+    }
+
+    .search-card,
+    .results-card,
+    .tickets-panel,
+    .feature-card,
+    .modal-panel {
+      padding: var(--card-padding);
+    }
+
+    .search-header,
+    .panel-header {
+      flex-direction: column;
+      align-items: flex-start;
+      margin-bottom: 20px;
+    }
+
+    .booking-form,
+    .feature-grid,
+    .meta-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .search-tools,
+    .tickets-toolbar,
+    .results-list,
+    .tickets-list {
+      gap: 18px;
+    }
+
+    .quick-dates,
+    .filter-pills {
+      flex-wrap: nowrap;
+      overflow-x: auto;
+      padding-bottom: 6px;
+      scroll-snap-type: x proximity;
+      scrollbar-width: none;
+    }
+
+    .quick-dates::-webkit-scrollbar,
+    .filter-pills::-webkit-scrollbar {
+      display: none;
+    }
+
+    .results-section,
+    .tickets-section,
+    .features {
+      padding: var(--section-gap) 0 0;
+    }
+
+    .result-item,
+    .ticket-item {
+      grid-template-columns: 1fr;
+      gap: 18px;
+      padding: 20px;
+    }
+
+    .result-meta,
+    .ticket-meta,
+    .journey-chip,
+    .helper-text,
+    .booking-modal-body .confirmation-content p,
+    .ticket-type-option-meta {
+      overflow-wrap: anywhere;
+      word-break: break-word;
+    }
+
+    .journey-chip {
+      max-width: 100%;
+    }
+
+    .item-actions {
+      width: 100%;
+      min-width: 0;
+      flex-direction: column;
+      align-items: stretch;
+    }
+
+    .booking-form > .primary-btn,
+    .auth-form > .primary-btn,
+    .item-actions > *,
+    .booking-modal-actions .item-actions > * {
+      width: 100%;
+    }
+
+    .field input,
+    .field select,
+    .booking-modal-body .field input,
+    .booking-modal-body .field select {
+      width: 100%;
+      min-width: 0;
+    }
+
+    .suggest-list {
+      max-height: min(280px, 45vh);
+      overflow-y: auto;
+      overscroll-behavior: contain;
+    }
+
+    .feature-grid {
+      gap: 20px;
+    }
+
+    .feature-card {
+      padding: 24px;
+    }
+
+    .toast-stack {
+      left: var(--page-gutter);
+      right: var(--page-gutter);
+      bottom: 12px;
+      width: auto;
+    }
+
+    .modal {
+      padding: 14px;
+      overflow-y: auto;
+    }
+
+    .modal-panel {
+      width: 100%;
+      max-width: min(460px, 90vw);
+      max-height: 90vh;
+      overflow: auto;
+      padding: 24px;
+    }
+
+    #bookingModal {
+      padding: 0;
+      overflow: hidden;
+      align-items: stretch;
+    }
+
+    #bookingModal .modal-panel {
+      width: 100%;
+      max-width: 100%;
+      height: 100vh;
+      min-height: 100vh;
+      max-height: 100vh;
+      height: 100dvh;
+      min-height: 100dvh;
+      max-height: 100dvh;
+      padding: 0;
+      overflow: hidden;
+      border-radius: 0;
+    }
+
+    #bookingModal .modal-header {
+      padding: 18px 18px 14px;
+    }
+
+    .booking-modal-body {
+      padding: 16px 18px 14px;
+      overscroll-behavior: contain;
+    }
+
+    .booking-modal-actions {
+      padding: 14px 18px calc(14px + env(safe-area-inset-bottom, 0px));
+    }
+
+    .ticket-type-option {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .ticket-type-option-meta {
+      text-align: left;
+      white-space: normal;
+    }
+
+    @media (min-width: 768px) {
+      :root {
+        --page-gutter: 16px;
+        --section-gap: 46px;
+        --card-padding: 24px;
+        --hero-min-height: 680px;
+      }
+
+      .nav-inner {
+        min-height: 58px;
+        gap: 20px;
+        flex-wrap: nowrap;
+      }
+
+      .nav-toggle-label {
+        display: none;
+      }
+
+      .nav-menu {
+        position: static;
+        display: flex;
+        align-items: center;
+        gap: 18px;
+        min-width: 0;
+        padding: 0;
+        border: none;
+        border-radius: 0;
+        background: transparent;
+        box-shadow: none;
+        opacity: 1;
+        visibility: visible;
+        transform: none;
+      }
+
+      .nav-links {
+        flex-direction: row;
+        align-items: center;
+        padding: 0;
+        gap: 14px;
+      }
+
+      .nav-links a,
+      .nav-links button {
+        width: auto;
+        justify-content: center;
+        padding: 10px 14px;
+      }
+
+      .nav-user {
+        width: auto;
+        max-width: min(32ch, 28vw);
+        padding: 0;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      .booking-modal-actions .item-actions > * {
+        width: auto;
+      }
+
+      .desktop-ticket-action {
+        display: inline-flex;
+      }
+
+      .ticket-action-menu {
+        display: none;
+      }
+
+      .quick-dates,
+      .filter-pills {
+        flex-wrap: wrap;
+        overflow: visible;
+        padding-bottom: 0;
+      }
+
+      .hero-content {
+        padding: 112px 0 198px;
+      }
+
+      .search-wrap {
+        margin-top: -98px;
+      }
+
+      #bookingModal {
+        padding: 12px;
+        align-items: center;
+      }
+
+      #bookingModal .modal-panel {
+        max-width: min(480px, 90vw);
+        height: auto;
+        min-height: 0;
+        max-height: 90vh;
+        margin: auto;
+        border-radius: 28px;
+      }
+
+      .search-header,
+      .panel-header {
+        flex-direction: row;
+        align-items: center;
+      }
+
+      .booking-form {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .booking-form > .primary-btn {
+        grid-column: 1 / -1;
+      }
+
+      .feature-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 26px;
+      }
+
+      .meta-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .item-actions {
+        flex-direction: row;
+      }
+
+      .item-actions > * {
+        flex: 1 1 0;
+      }
+
+      .auth-tabs {
+        flex-direction: row;
+      }
+
+      .auth-tab {
+        width: auto;
+      }
+
+      .ticket-type-option {
+        flex-direction: row;
+        align-items: center;
+      }
+
+      .ticket-type-option-meta {
+        text-align: right;
+        white-space: nowrap;
+      }
+    }
+
+    @media (min-width: 1024px) {
+      :root {
+        --card-padding: 30px;
+        --section-gap: 56px;
+        --hero-min-height: 760px;
+      }
+
+      .hero::after {
+        inset: auto -10% -140px auto;
+        width: 420px;
+        height: 420px;
+      }
+
+      .hero-content {
+        padding: 128px 0 226px;
+      }
+
+      .search-wrap {
+        margin-top: -114px;
+      }
+
+      .booking-form {
+        grid-template-columns: 1.1fr 1.1fr 0.9fr auto;
+      }
+
+      .booking-form > .primary-btn {
+        grid-column: auto;
+        width: auto;
+      }
+
+      .result-item,
+      .ticket-item {
+        grid-template-columns: minmax(0, 1fr) auto;
+        gap: 22px;
+        padding: 24px;
+      }
+
+      .item-actions {
+        width: auto;
+        min-width: 170px;
+        flex-direction: column;
+      }
+
+      .item-actions > * {
+        flex: initial;
+        width: 100%;
+      }
+
+      .feature-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 28px;
+      }
+    }
+
+    /* Product polish layer: keep the current layout, improve consistency and finish */
+    :root {
+      --space-1: 8px;
+      --space-2: 12px;
+      --space-3: 16px;
+      --space-4: 24px;
+      --space-5: 32px;
+      --card-border: rgba(34, 84, 43, 0.08);
+      --card-border-strong: rgba(46, 125, 50, 0.14);
+      --shadow-panel: 0 18px 34px rgba(18, 45, 25, 0.1);
+      --shadow-card-refined: 0 14px 28px rgba(18, 45, 25, 0.1);
+      --shadow-card-refined-hover: 0 22px 38px rgba(18, 45, 25, 0.14);
+    }
+
+    body {
+      text-rendering: optimizeLegibility;
+      font-feature-settings: "kern";
+    }
+
+    .search-card,
+    .results-card,
+    .tickets-panel,
+    .feature-card,
+    .modal-panel {
+      border-color: var(--card-border);
+      box-shadow: var(--shadow-panel);
+    }
+
+    .result-item,
+    .ticket-item,
+    .summary-metric,
+    .detail-grid > *,
+    .detail-item,
+    .booking-sheet-summary,
+    .ticket-type-option {
+      border-color: var(--card-border);
+      box-shadow: var(--shadow-card-refined);
+      transition: transform var(--transition-base), box-shadow var(--transition-base), border-color var(--transition-base), background var(--transition-base);
+    }
+
+    .search-header,
+    .panel-header,
+    .search-tools,
+    .tickets-toolbar,
+    .results-list,
+    .tickets-list {
+      gap: var(--space-3);
+    }
+
+    .search-header h2,
+    .panel-header h2,
+    .section-intro h2,
+    .result-title,
+    .ticket-title,
+    .feature-card h3,
+    .empty-state-title {
+      font-weight: 800;
+      letter-spacing: -0.025em;
+      line-height: 1.15;
+    }
+
+    .field label,
+    .booking-sheet-form .field label,
+    .ticket-type-group-label {
+      font-weight: 600;
+      color: #4f6354;
+    }
+
+    .search-header span,
+    .panel-header p,
+    .section-intro p,
+    .empty-state p,
+    .result-meta,
+    .ticket-meta,
+    .helper-text,
+    .detail-value,
+    .ticket-type-option-meta,
+    .drawer-meta {
+      line-height: 1.55;
+    }
+
+    .primary-meta,
+    .result-meta,
+    .ticket-meta {
+      font-size: 0.93rem;
+    }
+
+    .time-label,
+    .summary-metric strong,
+    .detail-heading,
+    .ticket-type-option-name {
+      font-weight: 700;
+      letter-spacing: -0.01em;
+    }
+
+    .primary-btn,
+    .secondary-btn,
+    .ghost-btn,
+    .danger-btn {
+      border-radius: 16px;
+      padding: 0 20px;
+    }
+
+    .secondary-btn,
+    .ghost-btn,
+    .danger-btn {
+      box-shadow: 0 8px 18px rgba(16, 52, 25, 0.06);
+    }
+
+    .primary-btn:focus-visible,
+    .secondary-btn:focus-visible,
+    .ghost-btn:focus-visible,
+    .danger-btn:focus-visible {
+      outline: none;
+      box-shadow: 0 0 0 4px rgba(46, 125, 50, 0.12);
+    }
+
+    .quick-date-btn,
+    .filter-pill,
+    .date-pill,
+    .journey-chip,
+    .badge {
+      line-height: 1.3;
+    }
+
+    .quick-date-btn,
+    .filter-pill,
+    .date-pill,
+    .journey-chip,
+    .ticket-type-option-name,
+    .feature-card h3,
+    .drawer-summary-title,
+    .nav-user {
+      overflow-wrap: anywhere;
+      word-break: break-word;
+    }
+
+    .mobile-action-dropdown,
+    .modal-panel {
+      overscroll-behavior: contain;
+    }
+
+    .mobile-action-dropdown {
+      max-height: min(50vh, 320px);
+      overflow: auto;
+    }
+
+    .toast,
+    .status-banner {
+      box-shadow: var(--shadow-card-refined);
+    }
+
+    @media (hover: hover) {
+      .search-card:hover,
+      .results-card:hover,
+      .tickets-panel:hover {
+        border-color: var(--card-border-strong);
+        box-shadow: 0 22px 40px rgba(18, 45, 25, 0.12);
+      }
+
+      .summary-metric:hover,
+      .detail-grid > *:hover,
+      .detail-item:hover,
+      .ticket-type-option:hover {
+        transform: translateY(-2px);
+        box-shadow: var(--shadow-card-refined-hover);
+      }
+    }
+
+    @media (max-width: 767px) {
+      :root {
+        --space-1: 8px;
+        --space-2: 12px;
+        --space-3: 16px;
+        --space-4: 20px;
+        --card-padding: 18px;
+        --section-gap: 36px;
+        --control-height: 50px;
+      }
+
+      .hero-content {
+        padding: 92px 0 170px;
+      }
+
+      .search-header,
+      .panel-header {
+        margin-bottom: var(--space-3);
+      }
+
+      .field {
+        gap: var(--space-1);
+      }
+
+      .field label,
+      .booking-sheet-form .field label,
+      .ticket-type-group-label {
+        font-size: 0.88rem;
+      }
+
+      .quick-date-btn,
+      .filter-pill,
+      .date-pill {
+        min-height: 40px;
+        padding: 0 14px;
+        font-size: 0.9rem;
+      }
+
+      .result-item,
+      .ticket-item,
+      .feature-card,
+      .booking-sheet-summary {
+        padding: 18px;
+      }
+
+      .result-item,
+      .ticket-item {
+        gap: var(--space-3);
+      }
+
+      .route-line {
+        padding: 16px;
+      }
+
+      .summary-metric {
+        min-height: 0;
+        padding: 14px 16px;
+      }
+
+      .detail-grid > *,
+      .detail-item,
+      .confirmation-content p,
+      .ticket-type-option {
+        padding: 12px 14px;
+      }
+
+      .feature-icon {
+        margin-bottom: 16px;
+      }
+
+      .modal {
+        padding: 12px;
+      }
+
+      .modal-panel {
+        padding: 20px;
+        border-radius: 20px;
+      }
+
+      #bookingModal .modal-header {
+        padding: 18px 18px 14px;
+      }
+
+      .booking-modal-body {
+        padding: 16px 18px 14px;
+      }
+
+      .booking-modal-actions {
+        padding: 14px 16px calc(14px + env(safe-area-inset-bottom, 0px));
+      }
+
+      .auth-tabs {
+        gap: 8px;
+      }
+
+      .auth-tab {
+        height: 46px;
+        padding: 0 12px;
+      }
+
+      .toast-stack {
+        gap: 10px;
+      }
+    }
+
+    /* Enterprise finish layer: visual refinement only, no structural changes */
+    :root {
+      --panel-border-enterprise: rgba(34, 84, 43, 0.09);
+      --panel-border-enterprise-strong: rgba(46, 125, 50, 0.14);
+      --shadow-panel-enterprise: 0 20px 38px rgba(18, 45, 25, 0.11);
+      --shadow-card-enterprise: 0 12px 28px rgba(18, 45, 25, 0.09);
+      --shadow-card-enterprise-hover: 0 22px 38px rgba(18, 45, 25, 0.13);
+      --surface-enterprise: linear-gradient(180deg, rgba(255, 255, 255, 0.95) 0%, rgba(249, 252, 250, 0.96) 100%);
+      --surface-enterprise-solid: linear-gradient(180deg, #ffffff 0%, #f9fcfa 100%);
+    }
+
+    body {
+      background: linear-gradient(180deg, #f5faf6 0%, #ffffff 46%, #f1f8f2 100%);
+      line-height: 1.6;
+      letter-spacing: -0.012em;
+    }
+
+    .navbar {
+      background: rgba(255, 255, 255, 0.94);
+      border-bottom-color: rgba(34, 84, 43, 0.1);
+      box-shadow: 0 8px 22px rgba(18, 45, 25, 0.06);
+    }
+
+    .search-card,
+    .results-card,
+    .tickets-panel,
+    .feature-card,
+    .modal-panel {
+      border-color: var(--panel-border-enterprise);
+      background: var(--surface-enterprise);
+      box-shadow: var(--shadow-panel-enterprise);
+    }
+
+    .result-item,
+    .ticket-item,
+    .summary-metric,
+    .detail-grid > *,
+    .detail-item,
+    .booking-sheet-summary,
+    .ticket-type-option,
+    .search-support-panel,
+    .insights-drawer,
+    .info-drawer,
+    .route-line {
+      border-color: var(--panel-border-enterprise);
+      box-shadow: var(--shadow-card-enterprise);
+    }
+
+    .result-item,
+    .ticket-item {
+      background: var(--surface-enterprise-solid);
+    }
+
+    .search-header,
+    .panel-header,
+    .search-tools,
+    .tickets-toolbar,
+    .results-list,
+    .tickets-list {
+      gap: 16px;
+    }
+
+    .search-header h2,
+    .panel-header h2,
+    .section-intro h2,
+    .result-title,
+    .ticket-title,
+    .feature-card h3,
+    .empty-state-title {
+      color: #142d19;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      line-height: 1.14;
+    }
+
+    .field label,
+    .booking-sheet-form .field label,
+    .ticket-type-group-label {
+      color: #536857;
+      font-weight: 600;
+      letter-spacing: 0.01em;
+    }
+
+    .field input,
+    .field select,
+    .booking-modal-body .field input,
+    .booking-modal-body .field select,
+    .auth-form .field input,
+    .auth-form .field select {
+      border-color: rgba(34, 84, 43, 0.14);
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.96) 0%, rgba(251, 253, 251, 0.98) 100%);
+      box-shadow: inset 0 1px 2px rgba(16, 52, 25, 0.04);
+    }
+
+    .field input:hover,
+    .field select:hover,
+    .booking-modal-body .field input:hover,
+    .booking-modal-body .field select:hover,
+    .auth-form .field input:hover,
+    .auth-form .field select:hover {
+      border-color: rgba(46, 125, 50, 0.24);
+    }
+
+    .field input:focus,
+    .field select:focus,
+    .booking-modal-body .field input:focus,
+    .booking-modal-body .field select:focus,
+    .auth-form .field input:focus,
+    .auth-form .field select:focus {
+      box-shadow: 0 0 0 4px rgba(46, 125, 50, 0.12), inset 0 1px 2px rgba(16, 52, 25, 0.03);
+    }
+
+    .primary-btn,
+    .secondary-btn,
+    .ghost-btn,
+    .danger-btn {
+      border-radius: 16px;
+      padding: 0 20px;
+      font-weight: 600;
+      letter-spacing: 0.01em;
+    }
+
+    .primary-btn {
+      box-shadow: 0 14px 26px rgba(46, 125, 50, 0.24);
+    }
+
+    .secondary-btn,
+    .ghost-btn,
+    .danger-btn {
+      box-shadow: 0 8px 18px rgba(16, 52, 25, 0.06);
+    }
+
+    .secondary-btn {
+      background: rgba(46, 125, 50, 0.09);
+    }
+
+    .ghost-btn {
+      background: rgba(24, 65, 33, 0.05);
+    }
+
+    .danger-btn {
+      background: rgba(198, 40, 40, 0.09);
+    }
+
+    .primary-btn:hover,
+    .primary-btn:focus-visible {
+      box-shadow: 0 18px 32px rgba(46, 125, 50, 0.28);
+    }
+
+    .secondary-btn:hover,
+    .secondary-btn:focus-visible,
+    .ghost-btn:hover,
+    .ghost-btn:focus-visible,
+    .danger-btn:hover,
+    .danger-btn:focus-visible {
+      box-shadow: 0 12px 22px rgba(16, 52, 25, 0.09);
+    }
+
+    .primary-meta,
+    .result-meta,
+    .ticket-meta,
+    .helper-text,
+    .detail-value,
+    .ticket-type-option-meta,
+    .drawer-meta,
+    .empty-state p,
+    .panel-header p {
+      color: #617364;
+      line-height: 1.58;
+    }
+
+    .badge {
+      min-height: 32px;
+      padding: 6px 12px;
+      border: 1px solid transparent;
+      font-size: 0.78rem;
+      letter-spacing: 0.04em;
+    }
+
+    .badge.available,
+    .badge.confirmed {
+      background: rgba(46, 125, 50, 0.14);
+      color: var(--primary-dark);
+      border-color: rgba(46, 125, 50, 0.12);
+    }
+
+    .badge.waiting {
+      background: rgba(178, 106, 0, 0.16);
+      color: #8f5803;
+      border-color: rgba(178, 106, 0, 0.12);
+    }
+
+    .badge.cancelled {
+      background: rgba(198, 40, 40, 0.14);
+      color: #a32525;
+      border-color: rgba(198, 40, 40, 0.1);
+    }
+
+    .summary-metric strong,
+    .detail-heading,
+    .ticket-type-option-name,
+    .time-label {
+      color: #17301d;
+      letter-spacing: -0.015em;
+    }
+
+    .status-banner {
+      border-radius: 18px;
+      box-shadow: var(--shadow-card-enterprise);
+    }
+
+    .status-banner.success {
+      background: rgba(46, 125, 50, 0.14);
+    }
+
+    .status-banner.error {
+      background: rgba(198, 40, 40, 0.14);
+    }
+
+    .status-banner.info {
+      background: rgba(46, 125, 50, 0.1);
+    }
+
+    @media (hover: hover) {
+      .search-card:hover,
+      .results-card:hover,
+      .tickets-panel:hover {
+        border-color: var(--panel-border-enterprise-strong);
+        box-shadow: 0 24px 42px rgba(18, 45, 25, 0.13);
+      }
+
+      .result-item:hover,
+      .ticket-item:hover,
+      .summary-metric:hover,
+      .detail-grid > *:hover,
+      .detail-item:hover,
+      .ticket-type-option:hover {
+        box-shadow: var(--shadow-card-enterprise-hover);
+      }
+    }
+
+    @media (max-width: 767px) {
+      .primary-btn,
+      .secondary-btn,
+      .ghost-btn,
+      .danger-btn {
+        padding: 0 16px;
+      }
+
+      .result-item,
+      .ticket-item,
+      .feature-card,
+      .booking-sheet-summary {
+        padding: 18px;
+      }
+    }
+
+    /* UX refinement layer: smoother feedback only, no layout changes */
+    .status-banner {
+      display: block;
+      max-height: 0;
+      margin-top: 0;
+      padding-top: 0;
+      padding-bottom: 0;
+      border-width: 0;
+      opacity: 0;
+      overflow: hidden;
+      pointer-events: none;
+      transform: translateY(-6px);
+      visibility: hidden;
+      transition:
+        max-height 0.26s ease,
+        margin-top 0.22s ease,
+        padding-top 0.22s ease,
+        padding-bottom 0.22s ease,
+        opacity 0.22s ease,
+        transform 0.22s ease,
+        visibility 0.22s ease;
+    }
+
+    .status-banner.show {
+      max-height: 240px;
+      margin-top: 18px;
+      padding-top: 14px;
+      padding-bottom: 14px;
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateY(0);
+      visibility: visible;
+    }
+
+    .modal {
+      display: flex;
+      opacity: 0;
+      pointer-events: none;
+      visibility: hidden;
+      transition: opacity 0.24s ease, visibility 0.24s ease;
+    }
+
+    .modal.show {
+      opacity: 1;
+      pointer-events: auto;
+      visibility: visible;
+      animation: none;
+    }
+
+    .modal .modal-panel {
+      opacity: 0;
+      transform: translateY(14px) scale(0.985);
+      transition: transform 0.26s ease, opacity 0.26s ease;
+    }
+
+    .modal.show .modal-panel {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+      animation: none;
+    }
+
+    #bookingModal .modal-panel {
+      transform: translateY(24px);
+    }
+
+    #bookingModal.show .modal-panel {
+      transform: translateY(0);
+      animation: none;
+    }
+
+    .results-section[aria-busy="true"] .results-list,
+    .tickets-list[aria-busy="true"] {
+      opacity: 0.8;
+      transition: opacity var(--transition-base), filter var(--transition-base);
+    }
+
+    .mobile-action-item,
+    .modal-close {
+      min-height: 44px;
+    }
+
+    @media (max-width: 767px) {
+      .primary-btn,
+      .secondary-btn,
+      .ghost-btn,
+      .danger-btn,
+      .mobile-action-item,
+      .modal-close {
+        min-height: 46px;
+      }
+    }
+
+    /* Final premium finish: depth, alignment, and key-value emphasis */
+    :root {
+      --shadow-premium-panel: 0 24px 44px rgba(18, 45, 25, 0.12), 0 2px 6px rgba(18, 45, 25, 0.05);
+      --shadow-premium-card: 0 16px 32px rgba(18, 45, 25, 0.09), 0 2px 6px rgba(18, 45, 25, 0.04);
+      --shadow-premium-card-hover: 0 24px 42px rgba(18, 45, 25, 0.14), 0 6px 14px rgba(18, 45, 25, 0.06);
+    }
+
+    .search-card,
+    .results-card,
+    .tickets-panel,
+    .feature-card,
+    .modal-panel {
+      box-shadow: var(--shadow-premium-panel);
+    }
+
+    .result-item,
+    .ticket-item,
+    .summary-metric,
+    .detail-grid > *,
+    .detail-item,
+    .booking-sheet-summary,
+    .ticket-type-option,
+    .search-support-panel,
+    .insights-drawer,
+    .info-drawer,
+    .route-line {
+      box-shadow: var(--shadow-premium-card);
+    }
+
+    .result-item,
+    .ticket-item,
+    .summary-metric,
+    .detail-grid > *,
+    .detail-item,
+    .booking-sheet-summary,
+    .ticket-type-option {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .result-item::before,
+    .ticket-item::before,
+    .summary-metric::before,
+    .detail-grid > *::before,
+    .detail-item::before,
+    .booking-sheet-summary::before,
+    .ticket-type-option::before {
+      content: "";
+      position: absolute;
+      inset: 0 0 auto 0;
+      height: 1px;
+      background: linear-gradient(90deg, rgba(255, 255, 255, 0.75), rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.75));
+      pointer-events: none;
+    }
+
+    .result-top,
+    .ticket-top,
+    .item-actions,
+    .summary-metrics,
+    .journey-strip {
+      align-items: center;
+    }
+
+    .summary-metric {
+      align-content: start;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.9) 0%, rgba(247, 251, 247, 0.96) 100%);
+      border-color: rgba(34, 84, 43, 0.12);
+    }
+
+    .summary-metric.emphasis {
+      background: linear-gradient(180deg, rgba(232, 243, 233, 0.95) 0%, rgba(255, 255, 255, 0.98) 100%);
+      border-color: rgba(46, 125, 50, 0.16);
+    }
+
+    .badge {
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.55);
+    }
+
+    .badge.available,
+    .badge.confirmed {
+      background: linear-gradient(180deg, rgba(46, 125, 50, 0.18) 0%, rgba(46, 125, 50, 0.12) 100%);
+      color: #184b1b;
+      border-color: rgba(46, 125, 50, 0.16);
+    }
+
+    .badge.waiting {
+      background: linear-gradient(180deg, rgba(178, 106, 0, 0.2) 0%, rgba(178, 106, 0, 0.14) 100%);
+      color: #7f4d01;
+      border-color: rgba(178, 106, 0, 0.16);
+    }
+
+    .badge.cancelled {
+      background: linear-gradient(180deg, rgba(198, 40, 40, 0.18) 0%, rgba(198, 40, 40, 0.12) 100%);
+      color: #8d2323;
+      border-color: rgba(198, 40, 40, 0.14);
+    }
+
+    .pnr-inline {
+      display: inline-flex;
+      align-items: center;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, rgba(46, 125, 50, 0.14) 0%, rgba(46, 125, 50, 0.08) 100%);
+      color: #184b1b;
+      font-size: 0.84rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.6);
+    }
+
+    .metric-value {
+      font-variant-numeric: tabular-nums;
+      letter-spacing: -0.01em;
+    }
+
+    .price-value {
+      color: #184b1b;
+      font-size: 1.06rem;
+      font-weight: 800;
+    }
+
+    .seat-value,
+    .waiting-value {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: fit-content;
+      padding: 4px 10px;
+      border-radius: 999px;
+      border: 1px solid transparent;
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.58);
+    }
+
+    .seat-value {
+      background: linear-gradient(180deg, rgba(46, 125, 50, 0.16) 0%, rgba(46, 125, 50, 0.08) 100%);
+      color: #184b1b;
+      border-color: rgba(46, 125, 50, 0.14);
+    }
+
+    .waiting-value {
+      background: linear-gradient(180deg, rgba(178, 106, 0, 0.18) 0%, rgba(178, 106, 0, 0.1) 100%);
+      color: #835002;
+      border-color: rgba(178, 106, 0, 0.14);
+    }
+
+    .journey-chip,
+    .ticket-type-option,
+    .detail-grid > *,
+    .detail-item {
+      border-color: rgba(34, 84, 43, 0.12);
+    }
+
+    .ticket-type-option.selected {
+      background: linear-gradient(180deg, rgba(46, 125, 50, 0.12) 0%, rgba(255, 255, 255, 0.96) 100%);
+      box-shadow: 0 14px 26px rgba(18, 45, 25, 0.1);
+    }
+
+    @media (hover: hover) {
+      .search-card:hover,
+      .results-card:hover,
+      .tickets-panel:hover {
+        box-shadow: var(--shadow-premium-card-hover);
+      }
+
+      .result-item:hover,
+      .ticket-item:hover,
+      .summary-metric:hover,
+      .detail-grid > *:hover,
+      .detail-item:hover,
+      .ticket-type-option:hover {
+        box-shadow: var(--shadow-premium-card-hover);
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="navbar">
+    <div class="container nav-inner">
+      <a href="#home" class="brand">IndianRail</a>
+      <input type="checkbox" id="nav-toggle" class="nav-toggle" aria-label="Toggle navigation">
+      <label for="nav-toggle" class="nav-toggle-label" aria-hidden="true">
+        <span></span>
+      </label>
+      <nav class="nav-menu" aria-label="Primary navigation">
+        <ul class="nav-links">
+          <li><a href="#home">Home</a></li>
+          <li><button type="button" data-auth-open="login" id="loginNavBtn">Login</button></li>
+          <li><button type="button" data-auth-open="register" id="registerNavBtn">Register</button></li>
+          <li><a href="#tickets" id="myTicketsNav">My Tickets</a></li>
+          <li class="hidden" id="logoutNavItem"><button type="button" id="logoutBtn">Logout</button></li>
+        </ul>
+        <div class="nav-user" id="navUser">Guest Mode</div>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="home">
+      <div class="container hero-content">
+        <div class="eyebrow">Smart Rail Travel Experience</div>
+        <h1>National Railway Reservation System</h1>
+        <p>Fast • Smart • Reliable</p>
+      </div>
+    </section>
+
+    <section class="search-wrap">
+      <div class="container">
+        <div class="search-card reveal-on-scroll">
+          <div class="search-header">
+            <h2>Search Your Journey</h2>
+            <span>Book your next trip in a few easy steps</span>
+          </div>
+          <form class="booking-form" id="searchForm">
+            <div class="field">
+              <label for="from">From</label>
+              <input id="from" name="from" type="text" placeholder="Enter departure station" autocomplete="off" maxlength="100" required>
+              <div class="suggest-list" id="fromSuggestions"></div>
+            </div>
+            <div class="field">
+              <label for="to">To</label>
+              <input id="to" name="to" type="text" placeholder="Enter destination station" autocomplete="off" maxlength="100" required>
+              <div class="suggest-list" id="toSuggestions"></div>
+            </div>
+            <div class="field">
+              <label for="date">Date</label>
+              <input id="date" name="date" type="date" required>
+            </div>
+            <button type="submit" class="primary-btn" id="searchBtn">Search Trains</button>
+          </form>
+          <div class="search-tools">
+            <details class="insights-drawer quick-dates-drawer" id="quickDatesDrawer">
+              <summary class="drawer-summary">
+                <div class="drawer-summary-main">
+                  <span class="drawer-summary-title">Quick travel dates</span>
+                  <span class="drawer-meta">Jump between today, tomorrow, and the next available travel days.</span>
+                </div>
+                <span class="drawer-chevron" aria-hidden="true"></span>
+              </summary>
+              <div class="drawer-content">
+                <div class="search-support-panel">
+                  <div class="insight-title">Quick Dates</div>
+                  <div class="quick-dates" id="quickDates"></div>
+                </div>
+              </div>
+            </details>
+            <details class="insights-drawer" id="insightsDrawer">
+              <summary class="drawer-summary">
+                <div class="drawer-summary-main">
+                  <span class="drawer-summary-title">Smart route insights</span>
+                  <span class="drawer-meta" id="insightsDrawerMeta">Recommendations, alternate dates, and booking hints.</span>
+                </div>
+                <span class="drawer-chevron" aria-hidden="true"></span>
+              </summary>
+              <div class="drawer-content">
+                <div class="route-insights" id="routeInsights">
+                  <div class="helper-text">Search a route to see recommendations, next available dates, and smart booking hints.</div>
+                </div>
+              </div>
+            </details>
+          </div>
+          <div class="status-banner" id="searchStatus" role="status" aria-live="polite"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="results-section" id="resultsSection">
+      <div class="container">
+        <div class="results-card reveal-on-scroll">
+          <div class="panel-header">
+            <h2>Available Trains</h2>
+            <p id="resultsCount">Search for a route to view trains.</p>
+          </div>
+          <div id="resultsList" class="results-list">
+            <div class="empty-state">
+              <div class="empty-state-icon" aria-hidden="true">IR</div>
+              <h3 class="empty-state-title">No search yet</h3>
+              <p>Enter route details above to fetch available trains.</p>
+              <p class="empty-state-hint">We will surface the best options, live seat counts, and alternate dates here.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="tickets-section" id="tickets">
+      <div class="container">
+        <div class="tickets-panel reveal-on-scroll">
+          <div class="panel-header">
+            <h2>My Tickets</h2>
+            <p id="ticketsSummary">Login to view and manage your bookings.</p>
+          </div>
+          <div class="tickets-toolbar">
+            <div class="filter-pills" id="ticketFilters">
+              <button type="button" class="filter-pill active" data-ticket-filter="ALL">All</button>
+              <button type="button" class="filter-pill" data-ticket-filter="CONFIRMED">Confirmed</button>
+              <button type="button" class="filter-pill" data-ticket-filter="WAITING">Waiting</button>
+              <button type="button" class="filter-pill" data-ticket-filter="CANCELLED">Cancelled</button>
+            </div>
+            <div class="helper-text" id="bookingStatusMeta">Status badges refresh automatically while you are signed in.</div>
+          </div>
+          <div id="ticketsList" class="tickets-list">
+            <div class="empty-state">
+              <div class="empty-state-icon" aria-hidden="true">IR</div>
+              <h3 class="empty-state-title">No bookings yet</h3>
+              <p>Your bookings will appear here after you login and reserve a ticket.</p>
+              <p class="empty-state-hint">You can filter confirmed, waiting, and cancelled tickets once reservations start appearing.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="features">
+      <div class="container">
+        <div class="section-intro">
+          <h2>Everything You Need for Smooth Reservations</h2>
+          <p>IndianRail brings together clarity, speed, and flexibility so travelers can book with confidence.</p>
+        </div>
+        <div class="feature-grid">
+          <article class="feature-card reveal-on-scroll">
+            <div class="feature-icon" aria-hidden="true">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M4 16.5V7.5C4 6.12 5.12 5 6.5 5H15L20 9.5V16.5C20 17.88 18.88 19 17.5 19H6.5C5.12 19 4 17.88 4 16.5Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+                <path d="M15 5V9.5H20" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+                <path d="M8 13H16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <h3>Instant Booking</h3>
+            <p>Search routes, compare options, and confirm your seats quickly with a streamlined booking flow.</p>
+          </article>
+
+          <article class="feature-card reveal-on-scroll">
+            <div class="feature-icon" aria-hidden="true">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 4C7.58 4 4 7.13 4 11C4 12.92 4.88 14.67 6.34 15.95L6 20L9.77 17.93C10.48 18.11 11.23 18.2 12 18.2C16.42 18.2 20 15.07 20 11.2C20 7.33 16.42 4 12 4Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+                <path d="M9 11.2H15" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+                <path d="M9.5 8.5H14.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <h3>Waiting List System</h3>
+            <p>Track demand efficiently with a clear waiting list workflow designed for better seat allocation visibility.</p>
+          </article>
+
+          <article class="feature-card reveal-on-scroll">
+            <div class="feature-icon" aria-hidden="true">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M7 7H17" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+                <path d="M7 12H14" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+                <path d="M7 17H12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+                <path d="M18.5 14.5L20 16L16.5 19.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                <rect x="4" y="4" width="16" height="16" rx="3" stroke="currentColor" stroke-width="1.8"/>
+              </svg>
+            </div>
+            <h3>Easy Cancellation</h3>
+            <p>Manage trip changes smoothly with a cancellation process that feels simple, transparent, and user friendly.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <p>&copy; 2026 IndianRail. Designed for a modern railway reservation experience.</p>
+    </div>
+  </footer>
+
+  <div class="modal" id="authModal" aria-hidden="true">
+    <div class="modal-panel">
+      <div class="modal-header">
+        <div>
+          <h2>Welcome to IndianRail</h2>
+          <p class="helper-text">Login or register to continue booking train tickets.</p>
+        </div>
+        <button type="button" class="modal-close" data-close-modal>&times;</button>
+      </div>
+
+      <div class="auth-tabs">
+        <button type="button" class="auth-tab active" data-auth-tab="login">Login</button>
+        <button type="button" class="auth-tab" data-auth-tab="register">Register</button>
+      </div>
+
+      <form class="auth-form active" id="loginForm">
+        <div class="field">
+          <label for="loginEmail">Email</label>
+          <input id="loginEmail" name="email" type="email" placeholder="Enter your email" maxlength="150" required>
+        </div>
+        <div class="field">
+          <label for="loginPassword">Password</label>
+          <input id="loginPassword" name="password" type="password" placeholder="Enter your password" required>
+        </div>
+        <button type="submit" class="primary-btn">Login</button>
+      </form>
+
+      <form class="auth-form" id="registerForm">
+        <div class="field">
+          <label for="registerName">Full Name</label>
+          <input id="registerName" name="name" type="text" placeholder="Enter your full name" maxlength="100" required>
+        </div>
+        <div class="field">
+          <label for="registerEmail">Email</label>
+          <input id="registerEmail" name="email" type="email" placeholder="Enter your email" maxlength="150" required>
+        </div>
+        <div class="field">
+          <label for="registerPassword">Password</label>
+          <input id="registerPassword" name="password" type="password" placeholder="Minimum 6 characters" required>
+        </div>
+        <button type="submit" class="primary-btn">Create Account</button>
+      </form>
+
+      <div class="status-banner" id="authStatus" role="status" aria-live="polite"></div>
+    </div>
+  </div>
+
+  <div class="modal" id="bookingModal" aria-hidden="true">
+    <div class="modal-panel">
+      <div class="modal-header">
+        <div>
+          <h2 id="bookingModalTitle">Booking Update</h2>
+          <p class="helper-text" id="bookingModalSubtitle">Your latest reservation response from IndianRail.</p>
+        </div>
+        <button type="button" class="modal-close" data-close-booking>&times;</button>
+      </div>
+      <div class="booking-modal-body">
+        <div class="confirmation-content" id="bookingModalContent"></div>
+        <div class="status-banner" id="bookingModalStatus" role="status" aria-live="polite"></div>
+      </div>
+      <div class="booking-modal-actions">
+        <div class="item-actions">
+          <button type="button" class="primary-btn" id="downloadTicketBtn">Download Ticket</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast-stack" id="toastStack"></div>
+
+  <script>
+    const API_BASE = (() => {
+      if (window.location.protocol === 'file:') {
+        console.warn("Running locally. API calls may fail. Use XAMPP/Apache.");
+      }
+      return new URL(
+        window.location.pathname.includes('/frontend/') ? '../api/' : './api/',
+        window.location.href
+      ).toString().replace(/\/$/, '');
+    })();
+    const ADMIN_ENTRY_URL = new URL('../admin.php', window.location.href).toString();
+    const state = {
+      user: null,
+      lastSearch: null,
+      lastTicketUrl: null,
+      pendingBookingTrain: null,
+      results: [],
+      routeMeta: null,
+      ticketFilter: 'ALL',
+      statusPoller: null,
+      stationDebounce: null,
+      expandedResultDetails: new Set(),
+      expandedTicketDetails: new Set(),
+      passengerDraft: {
+        passenger_name: '',
+        age: '',
+        gender: 'O',
+        ticket_type: 'Sleeper'
+      }
+    };
+
+    const authModal = document.getElementById('authModal');
+    const bookingModal = document.getElementById('bookingModal');
+    const authStatus = document.getElementById('authStatus');
+    const searchStatus = document.getElementById('searchStatus');
+    const resultsList = document.getElementById('resultsList');
+    const resultsCount = document.getElementById('resultsCount');
+    const resultsSection = document.getElementById('resultsSection');
+    const ticketsList = document.getElementById('ticketsList');
+    const ticketsSummary = document.getElementById('ticketsSummary');
+    const navUser = document.getElementById('navUser');
+    const logoutNavItem = document.getElementById('logoutNavItem');
+    const loginNavBtn = document.getElementById('loginNavBtn');
+    const registerNavBtn = document.getElementById('registerNavBtn');
+    const navToggle = document.getElementById('nav-toggle');
+    const bookingModalTitle = document.getElementById('bookingModalTitle');
+    const bookingModalSubtitle = document.getElementById('bookingModalSubtitle');
+    const bookingModalContent = document.getElementById('bookingModalContent');
+    const bookingModalBody = bookingModal.querySelector('.booking-modal-body');
+    const bookingModalStatus = document.getElementById('bookingModalStatus');
+    const downloadTicketBtn = document.getElementById('downloadTicketBtn');
+    const quickDates = document.getElementById('quickDates');
+    const quickDatesDrawer = document.getElementById('quickDatesDrawer');
+    const insightsDrawer = document.getElementById('insightsDrawer');
+    const insightsDrawerMeta = document.getElementById('insightsDrawerMeta');
+    const routeInsights = document.getElementById('routeInsights');
+    const toastStack = document.getElementById('toastStack');
+    const bookingStatusMeta = document.getElementById('bookingStatusMeta');
+    const fromInput = document.getElementById('from');
+    const toInput = document.getElementById('to');
+    const dateInput = document.getElementById('date');
+    const fromSuggestions = document.getElementById('fromSuggestions');
+    const toSuggestions = document.getElementById('toSuggestions');
+    const searchBtn = document.getElementById('searchBtn');
+
+    function escapeHtml(value) {
+      return String(value)
+        .replaceAll('&', '&amp;')
+        .replaceAll('<', '&lt;')
+        .replaceAll('>', '&gt;')
+        .replaceAll('"', '&quot;')
+        .replaceAll("'", '&#39;');
+    }
+
+    function pluralize(count, singular, plural = `${singular}s`) {
+      return `${count} ${count === 1 ? singular : plural}`;
+    }
+
+    function formatFriendlyDate(value, options = { weekday: 'short', day: 'numeric', month: 'short' }) {
+      if (!value) {
+        return 'Date not available';
+      }
+
+      const date = new Date(`${value}T00:00:00`);
+      if (Number.isNaN(date.getTime())) {
+        return String(value);
+      }
+
+      return date.toLocaleDateString('en-IN', options);
+    }
+
+    function toLocalIsoDate(date = new Date()) {
+      const year = date.getFullYear();
+      const month = String(date.getMonth() + 1).padStart(2, '0');
+      const day = String(date.getDate()).padStart(2, '0');
+      return `${year}-${month}-${day}`;
+    }
+
+    function renderEmptyState(title, message, hint = '') {
+      return `
+        <div class="empty-state">
+          <div class="empty-state-icon" aria-hidden="true">IR</div>
+          <h3 class="empty-state-title">${escapeHtml(title)}</h3>
+          <p>${escapeHtml(message)}</p>
+          ${hint ? `<p class="empty-state-hint">${escapeHtml(hint)}</p>` : ''}
+        </div>
+      `;
+    }
+
+    function buildResultsSummary(trains) {
+      if (!trains.length) {
+        return 'No trains matched your route and date.';
+      }
+
+      const totalOpenSeats = trains.reduce((sum, train) => sum + Number(train.available_seats || 0), 0);
+      const waitingOnlyCount = trains.filter((train) => Number(train.available_seats || 0) === 0).length;
+      const summary = [
+        `${pluralize(trains.length, 'train')} found`,
+        `${pluralize(totalOpenSeats, 'open seat')}`
+      ];
+
+      if (waitingOnlyCount > 0) {
+        summary.push(`${pluralize(waitingOnlyCount, 'waiting-only option')}`);
+      }
+
+      return summary.join(' • ');
+    }
+
+    function buildTicketSummary(bookings, filter = state.ticketFilter) {
+      if (!bookings.length) {
+        return filter === 'ALL' ? 'No bookings yet.' : `No ${filter.toLowerCase()} tickets yet.`;
+      }
+
+      const counts = bookings.reduce((accumulator, booking) => {
+        const status = String(booking.status || '').toUpperCase();
+        accumulator[status] = (accumulator[status] || 0) + 1;
+        return accumulator;
+      }, {});
+
+      const summary = [`${pluralize(bookings.length, 'booking')}`];
+      ['CONFIRMED', 'WAITING', 'CANCELLED'].forEach((status) => {
+        if (counts[status]) {
+          summary.push(`${counts[status]} ${status.toLowerCase()}`);
+        }
+      });
+
+      return summary.join(' • ');
+    }
+
+    function renderTicketSkeletons() {
+      ticketsList.innerHTML = Array.from({ length: 2 }).map(() => `
+        <div class="skeleton-card">
+          <div class="skeleton-line medium"></div>
+          <div class="skeleton-line long"></div>
+          <div class="skeleton-line long"></div>
+          <div class="skeleton-line short"></div>
+        </div>
+      `).join('');
+    }
+
+    function showBanner(element, type, message) {
+      element.className = `status-banner show ${type}`;
+      element.textContent = message;
+      element.setAttribute('aria-hidden', 'false');
+    }
+
+    function hideBanner(element) {
+      element.className = 'status-banner';
+      element.textContent = '';
+      element.setAttribute('aria-hidden', 'true');
+    }
+
+    function setBusyState(elements, isBusy) {
+      const targets = Array.isArray(elements) ? elements : [elements];
+
+      targets.forEach((element) => {
+        if (!element) {
+          return;
+        }
+
+        element.setAttribute('aria-busy', String(Boolean(isBusy)));
+      });
+    }
+
+    function closeNavMenu() {
+      if (navToggle) {
+        navToggle.checked = false;
+      }
+      syncNavToggleState();
+    }
+
+    function syncNavToggleState() {
+      if (navToggle) {
+        navToggle.setAttribute('aria-expanded', navToggle.checked ? 'true' : 'false');
+      }
+    }
+
+    function syncModalScrollLock() {
+      document.body.classList.toggle(
+        'modal-open',
+        authModal.classList.contains('show') || bookingModal.classList.contains('show')
+      );
+    }
+
+    function showToast(message, type = 'info') {
+      const toast = document.createElement('div');
+      toast.className = `toast ${type}`;
+      toast.setAttribute('role', 'status');
+      toast.textContent = message;
+      toastStack.appendChild(toast);
+      window.setTimeout(() => {
+        toast.remove();
+      }, 3200);
+    }
+
+    function closeOverflowMenus(exceptMenu = null) {
+      document.querySelectorAll('[data-overflow-menu].is-open').forEach((menu) => {
+        if (menu === exceptMenu) {
+          return;
+        }
+
+        menu.classList.remove('is-open');
+        const toggle = menu.querySelector('[data-overflow-toggle]');
+        if (toggle) {
+          toggle.setAttribute('aria-expanded', 'false');
+        }
+      });
+    }
+
+    function renderMobileActionMenu(items, label = 'Open actions') {
+      const menuItems = items.filter(Boolean).join('');
+      if (!menuItems) {
+        return '';
+      }
+
+      return `
+        <div class="mobile-action-menu ticket-action-menu" data-overflow-menu>
+          <button type="button" class="ghost-btn mobile-action-toggle" data-overflow-toggle aria-haspopup="menu" aria-expanded="false" aria-label="${escapeHtml(label)}">
+            More
+            <span aria-hidden="true">&#8942;</span>
+          </button>
+          <div class="mobile-action-dropdown" role="menu">
+            ${menuItems}
+          </div>
+        </div>
+      `;
+    }
+
+    let revealObserver;
+
+    function ensureRevealObserver() {
+      if (revealObserver || !('IntersectionObserver' in window)) {
+        return;
+      }
+
+      revealObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) {
+            return;
+          }
+
+          entry.target.classList.add('is-visible');
+          revealObserver.unobserve(entry.target);
+        });
+      }, {
+        threshold: 0.14
+      });
+    }
+
+    function queueRevealAnimations(scope = document) {
+      const items = scope.querySelectorAll('.reveal-on-scroll');
+      if (!items.length) {
+        return;
+      }
+
+      if (!('IntersectionObserver' in window)) {
+        items.forEach((item) => item.classList.add('is-visible'));
+        return;
+      }
+
+      ensureRevealObserver();
+      items.forEach((item, index) => {
+        item.style.setProperty('--reveal-delay', `${Math.min(index * 40, 220)}ms`);
+        revealObserver.observe(item);
+      });
+    }
+
+    function bindDrawerState(scope, store) {
+      scope.querySelectorAll('details[data-detail-key]').forEach((drawer) => {
+        if (drawer.dataset.drawerBound === 'true') {
+          return;
+        }
+
+        drawer.dataset.drawerBound = 'true';
+        drawer.addEventListener('toggle', () => {
+          if (drawer.open) {
+            store.add(drawer.dataset.detailKey);
+          } else {
+            store.delete(drawer.dataset.detailKey);
+          }
+        });
+      });
+    }
+
+    function syncResponsiveDrawers() {
+      if (window.innerWidth >= 768) {
+        if (quickDatesDrawer) {
+          quickDatesDrawer.open = true;
+        }
+        if (insightsDrawer && state.routeMeta && state.results.length) {
+          insightsDrawer.open = true;
+        }
+        return;
+      }
+
+      if (quickDatesDrawer) {
+        quickDatesDrawer.open = false;
+      }
+      if (insightsDrawer) {
+        insightsDrawer.open = false;
+      }
+    }
+
+    function syncInsightsDrawer(shouldOpen = false, summary = 'Recommendations, alternate dates, and booking hints.') {
+      insightsDrawerMeta.textContent = summary;
+      insightsDrawer.open = shouldOpen;
+    }
+
+    function revealResultsOnMobile() {
+      if (window.innerWidth >= 768) {
+        return;
+      }
+
+      resultsSection?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    function isAdminUser(user) {
+      return Boolean(user && String(user.role || '').toUpperCase() === 'ADMIN');
+    }
+
+    function redirectToAdminPanel() {
+      window.location.replace(ADMIN_ENTRY_URL);
+    }
+
+    function consumeAuthNotice() {
+      const url = new URL(window.location.href);
+      const authCode = url.searchParams.get('auth');
+      const message = url.searchParams.get('message');
+
+      if (!authCode && !message) {
+        return;
+      }
+
+      const notice = message || (authCode === 'admin_required'
+        ? 'You are not authorized to access the admin panel.'
+        : 'Authentication is required to continue.');
+
+      showBanner(searchStatus, 'error', notice);
+      showToast(notice, 'error');
+
+      url.searchParams.delete('auth');
+      url.searchParams.delete('message');
+      const cleanUrl = `${url.pathname}${url.search}${url.hash}`;
+      window.history.replaceState({}, document.title, cleanUrl);
+    }
+
+    async function apiFetch(url, options = {}) {
+      let response;
+      const headers = new Headers(options.headers || {});
+      const requestMethod = String(options.method || 'GET').toUpperCase();
+
+      if (!headers.has('Accept')) {
+        headers.set('Accept', 'application/json');
+      }
+
+      if (options.body !== undefined && !(options.body instanceof FormData) && !headers.has('Content-Type')) {
+        headers.set('Content-Type', 'application/json');
+      }
+
+      try {
+        response = await fetch(url, {
+          headers,
+          credentials: 'same-origin',
+          ...options
+        });
+      } catch (error) {
+        if (error?.name === 'AbortError') {
+          throw error;
+        }
+
+        console.error('[Public API] Network failure', {
+          url,
+          method: requestMethod,
+          error
+        });
+        const isFileMode = window.location.protocol === 'file:';
+        throw new Error(
+          isFileMode
+            ? 'This page is opened as a local file. Run the project through XAMPP/Apache and open http://localhost/project/.'
+            : 'Unable to reach the IndianRail API. Make sure Apache and MySQL are running in XAMPP.'
+        );
+      }
+
+      const responseText = await response.text();
+      const contentType = response.headers.get('content-type') || '';
+      let payload = null;
+      if (responseText !== '' && contentType.includes('application/json')) {
+        try {
+          payload = JSON.parse(responseText);
+        } catch (error) {
+          console.error('[Public API] Invalid JSON response', {
+            url,
+            method: requestMethod,
+            status: response.status,
+            body: responseText
+          });
+          throw new Error(`API returned invalid JSON. ${responseText}`);
+        }
+      }
+
+      console.debug('[Public API] Response', {
+        url,
+        method: requestMethod,
+        status: response.status,
+        ok: response.ok,
+        contentType,
+        body: responseText,
+        payload
+      });
+
+      if (!response.ok || !payload?.success) {
+        console.error('[Public API] Error response', {
+          url,
+          method: requestMethod,
+          status: response.status,
+          body: responseText,
+          payload
+        });
+        const error = new Error(payload?.message || responseText || `Request failed with status ${response.status}.`);
+        error.status = response.status;
+        throw error;
+      }
+
+      if (!contentType.includes('application/json')) {
+        throw new Error('API returned a non-JSON response. Check Apache/PHP logs.');
+      }
+
+      return payload;
+    }
+
+    function switchAuthTab(tab) {
+      document.querySelectorAll('[data-auth-tab]').forEach((button) => {
+        button.classList.toggle('active', button.dataset.authTab === tab);
+      });
+      document.querySelectorAll('.auth-form').forEach((form) => {
+        form.classList.toggle('active', form.id === `${tab}Form`);
+      });
+      hideBanner(authStatus);
+    }
+
+    function openAuthModal(tab = 'login') {
+      switchAuthTab(tab);
+      authModal.classList.add('show');
+      authModal.setAttribute('aria-hidden', 'false');
+      syncModalScrollLock();
+      window.setTimeout(() => {
+        const initialField = tab === 'register'
+          ? document.getElementById('registerName')
+          : document.getElementById('loginEmail');
+        initialField?.focus();
+      }, 30);
+    }
+
+    function closeAuthModal() {
+      authModal.classList.remove('show');
+      authModal.setAttribute('aria-hidden', 'true');
+      syncModalScrollLock();
+    }
+
+    function setBookingModalHeading(title, subtitle) {
+      if (bookingModalTitle) {
+        bookingModalTitle.textContent = title;
+      }
+
+      if (bookingModalSubtitle) {
+        bookingModalSubtitle.textContent = subtitle;
+      }
+    }
+
+    function openBookingModal(message, details = [], ticketUrl = null) {
+      setBookingModalHeading(
+        ticketUrl ? 'Booking Confirmed' : 'Booking Update',
+        ticketUrl
+          ? 'Your reservation has been created. Ticket details are ready below.'
+          : 'Your latest reservation response from IndianRail.'
+      );
+      bookingModalContent.innerHTML = details.map((line) => `<p>${line}</p>`).join('');
+      showBanner(bookingModalStatus, ticketUrl ? 'success' : 'info', message);
+      state.lastTicketUrl = ticketUrl;
+      state.pendingBookingTrain = null;
+      downloadTicketBtn.dataset.action = 'download';
+      downloadTicketBtn.textContent = 'Download Ticket';
+      downloadTicketBtn.style.display = ticketUrl ? 'inline-flex' : 'none';
+      downloadTicketBtn.disabled = false;
+      downloadTicketBtn.removeAttribute('form');
+      downloadTicketBtn.type = 'button';
+      bookingModal.classList.add('show');
+      bookingModal.setAttribute('aria-hidden', 'false');
+      syncModalScrollLock();
+      if (bookingModalBody) {
+        bookingModalBody.scrollTop = 0;
+      }
+    }
+
+    function closeBookingModal() {
+      bookingModal.classList.remove('show');
+      bookingModal.setAttribute('aria-hidden', 'true');
+      state.pendingBookingTrain = null;
+      state.lastTicketUrl = null;
+      bookingModalContent.innerHTML = '';
+      hideBanner(bookingModalStatus);
+      setBookingModalHeading('Booking Update', 'Your latest reservation response from IndianRail.');
+      downloadTicketBtn.dataset.action = 'download';
+      downloadTicketBtn.textContent = 'Download Ticket';
+      downloadTicketBtn.style.display = 'none';
+      downloadTicketBtn.disabled = false;
+      downloadTicketBtn.removeAttribute('form');
+      downloadTicketBtn.type = 'button';
+      syncModalScrollLock();
+    }
+
+    function updateNav() {
+      if (state.user) {
+        navUser.textContent = `Signed in as ${state.user.name}`;
+        logoutNavItem.classList.remove('hidden');
+        loginNavBtn.parentElement.classList.add('hidden');
+        registerNavBtn.parentElement.classList.add('hidden');
+        bookingStatusMeta.textContent = 'Status badges refresh automatically every 30 seconds while you are signed in.';
+      } else {
+        navUser.textContent = 'Guest Mode';
+        logoutNavItem.classList.add('hidden');
+        loginNavBtn.parentElement.classList.remove('hidden');
+        registerNavBtn.parentElement.classList.remove('hidden');
+        bookingStatusMeta.textContent = 'Status badges refresh automatically while you are signed in.';
+      }
+    }
+
+    function toTicketUrl(pnr) {
+      return `${API_BASE}/generate_ticket.php?pnr=${encodeURIComponent(pnr)}`;
+    }
+
+    function generateRequestToken() {
+      if (window.crypto && typeof window.crypto.randomUUID === 'function') {
+        return window.crypto.randomUUID();
+      }
+
+      return `req-${Date.now()}-${Math.random().toString(16).slice(2)}`;
+    }
+
+    function setButtonLoading(button, loadingText, isLoading) {
+      if (!button) {
+        return;
+      }
+
+      if (isLoading) {
+        button.dataset.loadingRestore = button.textContent;
+        button.disabled = true;
+        button.textContent = loadingText;
+        button.dataset.loading = 'true';
+        button.setAttribute('aria-busy', 'true');
+        return;
+      }
+
+      button.disabled = false;
+      delete button.dataset.loading;
+      button.removeAttribute('aria-busy');
+      if (button.dataset.loadingRestore) {
+        button.textContent = button.dataset.loadingRestore;
+        delete button.dataset.loadingRestore;
+      }
+    }
+
+    function normalizeGender(value) {
+      const normalized = String(value || '').trim().toUpperCase();
+      const map = {
+        M: 'M',
+        MALE: 'M',
+        F: 'F',
+        FEMALE: 'F',
+        O: 'O',
+        OTHER: 'O'
+      };
+
+      return map[normalized] || '';
+    }
+
+    function normalizeTicketType(value) {
+      const normalized = String(value || '').trim().toUpperCase().replaceAll(' ', '');
+      const map = {
+        SLEEPER: 'Sleeper',
+        SL: 'Sleeper',
+        '3AC': '3AC',
+        '2AC': '2AC',
+        '1AC': '1AC'
+      };
+
+      return map[normalized] || '';
+    }
+
+    function getTrainClassList(train) {
+      if (!train || typeof train !== 'object' || !train.class_availability) {
+        return [];
+      }
+
+      return ['Sleeper', '3AC', '2AC', '1AC']
+        .map((ticketType) => train.class_availability[ticketType])
+        .filter(Boolean);
+    }
+
+    function getPreferredTicketType(train) {
+      const trainClasses = getTrainClassList(train);
+      const draftedType = normalizeTicketType(state.passengerDraft.ticket_type);
+
+      if (draftedType && trainClasses.some((item) => item.ticket_type === draftedType)) {
+        return draftedType;
+      }
+
+      const firstAvailableClass = trainClasses.find((item) => Number(item.available_seats || 0) > 0);
+      if (firstAvailableClass) {
+        return firstAvailableClass.ticket_type;
+      }
+
+      return trainClasses[0]?.ticket_type || 'Sleeper';
+    }
+
+    function renderClassBreakdown(train) {
+      const trainClasses = getTrainClassList(train);
+      if (!trainClasses.length) {
+        return '';
+      }
+
+      return trainClasses.map((classData) => {
+        const availableSeats = Number(classData.available_seats || 0);
+        const waitingCount = Number(classData.waiting_count || 0);
+        const availabilityText = availableSeats > 0
+          ? `${availableSeats} seats`
+          : waitingCount > 0
+            ? 'WL only'
+            : 'Full';
+        const waitingText = waitingCount > 0 ? ` • WL ${waitingCount}` : '';
+
+        return `
+          <div class="detail-item">
+            <span class="detail-heading">${escapeHtml(classData.ticket_type)}</span>
+            <span class="detail-value">${escapeHtml(availabilityText)} • ${escapeHtml(classData.price_label)}${escapeHtml(waitingText)}</span>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function renderTicketTypeOptions(train, selectedType) {
+      const trainClasses = getTrainClassList(train);
+
+      return trainClasses.map((classData) => {
+        const availableSeats = Number(classData.available_seats || 0);
+        const waitingCount = Number(classData.waiting_count || 0);
+        const availabilityLabel = availableSeats > 0
+          ? `${availableSeats} seats`
+          : waitingCount > 0
+            ? `WL ${waitingCount}`
+            : 'Waiting list';
+        const isSelected = classData.ticket_type === selectedType;
+
+        return `
+          <button
+            type="button"
+            class="ticket-type-option ${isSelected ? 'selected' : ''}"
+            data-ticket-type="${escapeHtml(classData.ticket_type)}"
+            aria-pressed="${isSelected ? 'true' : 'false'}"
+          >
+            <span class="ticket-type-option-name">${escapeHtml(classData.ticket_type)}</span>
+            <span class="ticket-type-option-meta">${escapeHtml(availabilityLabel)} • ${escapeHtml(classData.price_label)}</span>
+          </button>
+        `;
+      }).join('');
+    }
+
+    function updateTicketTypeSelection(ticketType) {
+      const normalizedType = normalizeTicketType(ticketType);
+      const hiddenInput = document.getElementById('ticketType');
+      if (!normalizedType || !hiddenInput) {
+        return;
+      }
+
+      hiddenInput.value = normalizedType;
+      state.passengerDraft.ticket_type = normalizedType;
+      bookingModalContent.querySelectorAll('.ticket-type-option').forEach((button) => {
+        const isSelected = button.dataset.ticketType === normalizedType;
+        button.classList.toggle('selected', isSelected);
+        button.setAttribute('aria-pressed', isSelected ? 'true' : 'false');
+      });
+    }
+
+    function openPassengerBookingModal(train) {
+      const passengerName = state.passengerDraft.passenger_name || state.user?.name || '';
+      const passengerAge = state.passengerDraft.age || '';
+      const passengerGender = state.passengerDraft.gender || 'O';
+      const passengerTicketType = getPreferredTicketType(train);
+      const friendlyDate = formatFriendlyDate(train.travel_date);
+
+      state.pendingBookingTrain = train;
+      state.lastTicketUrl = null;
+      setBookingModalHeading(
+        'Complete Booking',
+        'Fill in passenger details and confirm your reservation.'
+      );
+
+      bookingModalContent.innerHTML = `
+        <div class="booking-sheet-summary">
+          <div class="insight-title">${escapeHtml(train.train_name)} • Train ${escapeHtml(train.train_number)}</div>
+          <div class="route-line">
+            <div class="time-block">
+              <span class="time-label">${escapeHtml(train.departure_label)}</span>
+              <span class="station-label">${escapeHtml(train.source)}</span>
+            </div>
+            <div class="connector">
+              <span>${escapeHtml(train.duration_label)}</span>
+            </div>
+            <div class="time-block align-end">
+              <span class="time-label">${escapeHtml(train.arrival_label)}</span>
+              <span class="station-label">${escapeHtml(train.destination)}</span>
+            </div>
+          </div>
+          <div class="summary-metrics">
+                <div class="summary-metric emphasis">
+                  <span class="metric-label">Travel Date</span>
+                  <strong>${escapeHtml(friendlyDate)}</strong>
+                </div>
+                <div class="summary-metric">
+                  <span class="metric-label">Fare From</span>
+                  <strong class="metric-value price-value">${escapeHtml(train.price_label)}</strong>
+                </div>
+                <div class="summary-metric">
+                  <span class="metric-label">Open Seats</span>
+                  <strong class="metric-value seat-value">${escapeHtml(String(train.available_seats))}</strong>
+                </div>
+              </div>
+        </div>
+        <form class="booking-sheet-form" id="passengerBookingForm">
+          <div class="field">
+            <label for="passengerName">Passenger Name</label>
+            <input id="passengerName" name="passenger_name" type="text" autocomplete="name" placeholder="Enter passenger name" value="${escapeHtml(passengerName)}" maxlength="120" required>
+          </div>
+          <div class="field">
+            <label for="passengerAge">Age</label>
+            <input id="passengerAge" name="age" type="number" min="1" max="120" step="1" inputmode="numeric" placeholder="Enter age" value="${escapeHtml(passengerAge)}" required>
+          </div>
+          <div class="field">
+            <label for="passengerGender">Gender</label>
+            <select id="passengerGender" name="gender" required>
+              <option value="M" ${passengerGender === 'M' ? 'selected' : ''}>Male</option>
+              <option value="F" ${passengerGender === 'F' ? 'selected' : ''}>Female</option>
+              <option value="O" ${passengerGender === 'O' ? 'selected' : ''}>Other</option>
+            </select>
+          </div>
+          <div class="ticket-type-group">
+            <label class="ticket-type-group-label" for="ticketType">Ticket Type</label>
+            <div class="ticket-type-list">
+              ${renderTicketTypeOptions(train, passengerTicketType)}
+            </div>
+            <input id="ticketType" name="ticket_type" type="hidden" value="${escapeHtml(passengerTicketType)}" required>
+          </div>
+        </form>
+      `;
+
+      showBanner(bookingModalStatus, 'info', 'Select a ticket class and enter passenger details to continue.');
+      downloadTicketBtn.dataset.action = 'submit-booking';
+      downloadTicketBtn.textContent = 'Confirm Booking';
+      downloadTicketBtn.style.display = 'inline-flex';
+      downloadTicketBtn.disabled = false;
+      downloadTicketBtn.setAttribute('form', 'passengerBookingForm');
+      downloadTicketBtn.type = 'submit';
+
+      bookingModal.classList.add('show');
+      bookingModal.setAttribute('aria-hidden', 'false');
+      syncModalScrollLock();
+      if (bookingModalBody) {
+        bookingModalBody.scrollTop = 0;
+      }
+
+      window.setTimeout(() => {
+        const input = document.getElementById('passengerName');
+        if (input) {
+          input.focus();
+        }
+      }, 30);
+    }
+
+    function getPassengerPayload(formElement) {
+      const formData = new FormData(formElement);
+      const passengerName = String(formData.get('passenger_name') || '').trim();
+      const age = Number(String(formData.get('age') || '').trim());
+      const gender = normalizeGender(formData.get('gender'));
+      const ticketType = normalizeTicketType(formData.get('ticket_type'));
+
+      if (!passengerName) {
+        throw new Error('Passenger name is required.');
+      }
+
+      if (passengerName.length > 120) {
+        throw new Error('Passenger name must be 120 characters or fewer.');
+      }
+
+      if (!Number.isInteger(age) || age < 1 || age > 120) {
+        throw new Error('Age must be between 1 and 120.');
+      }
+
+      if (!gender) {
+        throw new Error('Gender must be M, F, or O.');
+      }
+
+      if (!ticketType) {
+        throw new Error('Ticket type must be Sleeper, 3AC, 2AC, or 1AC.');
+      }
+
+      return {
+        passenger_name: passengerName,
+        age,
+        gender,
+        ticket_type: ticketType
+      };
+    }
+
+    function renderSearchSkeletons() {
+      resultsCount.textContent = 'Checking live availability and route options...';
+      resultsList.innerHTML = Array.from({ length: 3 }).map(() => `
+        <div class="skeleton-card">
+          <div class="skeleton-line medium"></div>
+          <div class="skeleton-line long"></div>
+          <div class="skeleton-line short"></div>
+          <div class="skeleton-line long"></div>
+        </div>
+      `).join('');
+    }
+
+    function renderQuickDates() {
+      const base = new Date();
+      quickDates.innerHTML = Array.from({ length: 7 }).map((_, index) => {
+        const date = new Date(base);
+        date.setDate(base.getDate() + index);
+        const iso = toLocalIsoDate(date);
+        const label = index === 0 ? 'Today' : index === 1 ? 'Tomorrow' : date.toLocaleDateString('en-IN', { weekday: 'short', day: 'numeric', month: 'short' });
+        const isActive = dateInput.value === iso;
+        return `<button type="button" class="quick-date-btn ${isActive ? 'active' : ''}" data-date-value="${iso}">${label}</button>`;
+      }).join('');
+    }
+
+    function renderRouteInsights(meta = null, trains = []) {
+      if (!meta || !trains.length) {
+        syncInsightsDrawer(false, 'Recommendations, alternate dates, and booking hints.');
+        routeInsights.innerHTML = '<div class="helper-text">Search a route to see recommendations, next available dates, and smart booking hints.</div>';
+        return;
+      }
+
+      const activeDates = meta.available_dates || [];
+      const searchDate = formatFriendlyDate(dateInput.value, { day: 'numeric', month: 'short', year: 'numeric' });
+      const trainCount = pluralize(trains.length, 'train');
+      const nextAvailableDate = activeDates.length ? formatFriendlyDate(activeDates[0]) : 'Not available';
+      const keepInsightsOpen = window.innerWidth >= 768 || insightsDrawer.open;
+
+      syncInsightsDrawer(
+        keepInsightsOpen,
+        activeDates.length
+          ? `For ${meta.route} • ${pluralize(activeDates.length, 'next date')}`
+          : `For ${meta.route} • no upcoming open dates`
+      );
+
+      routeInsights.innerHTML = `
+        <div class="insight-title">Smart Recommendations for ${escapeHtml(meta.route)}</div>
+        <div class="summary-metrics insight-metrics">
+          <div class="summary-metric emphasis">
+            <span class="metric-label">Search Date</span>
+            <strong>${escapeHtml(searchDate)}</strong>
+          </div>
+          <div class="summary-metric">
+            <span class="metric-label">Trains Found</span>
+            <strong>${escapeHtml(trainCount)}</strong>
+          </div>
+          <div class="summary-metric">
+            <span class="metric-label">Next Open Date</span>
+            <strong>${escapeHtml(nextAvailableDate)}</strong>
+          </div>
+        </div>
+        <div>
+          <div class="insight-title">Next Available Dates</div>
+          <div class="available-dates">
+            ${activeDates.length
+              ? activeDates.map((date) => `<button type="button" class="date-pill ${date === dateInput.value ? 'active' : ''}" data-date-value="${date}">${escapeHtml(formatFriendlyDate(date, { day: 'numeric', month: 'short' }))}</button>`).join('')
+              : '<span class="helper-text">No open seats in the next 7 days for this route.</span>'}
+          </div>
+        </div>
+      `;
+    }
+
+    function renderResults(trains) {
+      if (!trains.length) {
+        resultsCount.textContent = 'No trains matched your route and date.';
+        resultsList.innerHTML = renderEmptyState(
+          'No trains found',
+          'Try another route, city spelling, or travel date.',
+          'We will keep this section focused on the most relevant options when results are available.'
+        );
+        return;
+      }
+
+      resultsCount.textContent = buildResultsSummary(trains);
+      resultsList.innerHTML = trains.map((train) => {
+        const isAvailable = train.available_seats > 0;
+        const statusClass = isAvailable ? 'available' : 'waiting';
+        const detailKey = `train-${train.id}`;
+        const friendlyDate = formatFriendlyDate(train.travel_date);
+        const classCount = getTrainClassList(train).length;
+
+        return `
+          <article class="result-item reveal-on-scroll">
+            <div class="card-main">
+              <div class="result-top">
+                <div>
+                  <div class="result-title">${escapeHtml(train.train_name)}</div>
+                  <p class="primary-meta">Train ${escapeHtml(train.train_number)} • ${escapeHtml(friendlyDate)}</p>
+                </div>
+                <span class="badge ${statusClass}">${isAvailable ? 'Seats Available' : 'Waiting List'}</span>
+              </div>
+              <div class="route-line">
+                <div class="time-block">
+                  <span class="time-label">${escapeHtml(train.departure_label)}</span>
+                  <span class="station-label">${escapeHtml(train.source)}</span>
+                </div>
+                <div class="connector">
+                  <span>${escapeHtml(train.duration_label)}</span>
+                </div>
+                <div class="time-block align-end">
+                  <span class="time-label">${escapeHtml(train.arrival_label)}</span>
+                  <span class="station-label">${escapeHtml(train.destination)}</span>
+                </div>
+              </div>
+              <div class="summary-metrics">
+                <div class="summary-metric emphasis">
+                  <span class="metric-label">Fare</span>
+                  <strong class="metric-value price-value">${escapeHtml(train.price_label)}</strong>
+                </div>
+                <div class="summary-metric">
+                  <span class="metric-label">Open Seats</span>
+                  <strong class="metric-value seat-value">${escapeHtml(String(train.available_seats))}</strong>
+                </div>
+                <div class="summary-metric">
+                  <span class="metric-label">Waiting</span>
+                  <strong class="metric-value waiting-value">${escapeHtml(String(train.waiting_count))}</strong>
+                </div>
+              </div>
+              <details class="info-drawer" data-detail-key="${detailKey}" ${state.expandedResultDetails.has(detailKey) ? 'open' : ''}>
+                <summary class="drawer-summary">
+                  <div class="drawer-summary-main">
+                    <span class="drawer-summary-title">Journey and class details</span>
+                    <span class="drawer-meta">${pluralize(classCount, 'class option')} • ${escapeHtml(train.source)} to ${escapeHtml(train.destination)}</span>
+                  </div>
+                  <span class="drawer-chevron" aria-hidden="true"></span>
+                </summary>
+                <div class="drawer-content">
+                  <div class="journey-strip">
+                    <span class="journey-chip">Travel ${escapeHtml(friendlyDate)}</span>
+                    <span class="journey-chip">Train ${escapeHtml(train.train_number)}</span>
+                    <span class="journey-chip">${isAvailable ? `${escapeHtml(String(train.available_seats))} seats open` : `WL ${escapeHtml(String(train.waiting_count))}`}</span>
+                  </div>
+                  <div class="meta-grid detail-grid">
+                    ${renderClassBreakdown(train)}
+                  </div>
+                </div>
+              </details>
+            </div>
+            <div class="item-actions">
+              <button type="button" class="primary-btn book-btn" data-train-id="${train.id}">Book Now</button>
+            </div>
+          </article>
+        `;
+      }).join('');
+
+      bindDrawerState(resultsList, state.expandedResultDetails);
+      queueRevealAnimations(resultsList);
+    }
+
+    function renderTickets(bookings) {
+      if (!bookings.length) {
+        ticketsList.innerHTML = renderEmptyState(
+          'No tickets found',
+          'No tickets found for the selected filter yet.',
+          'Switch filters or make a booking to see reservations here.'
+        );
+        return;
+      }
+
+      ticketsList.innerHTML = bookings.map((booking) => {
+        const statusClass = booking.status === 'CONFIRMED' ? 'confirmed' : booking.status === 'WAITING' ? 'waiting' : 'cancelled';
+        const displayStatus = booking.display_status || booking.status;
+        const seatInfo = booking.status === 'WAITING'
+          ? booking.wl_number || displayStatus || 'Waiting'
+          : booking.status === 'CONFIRMED'
+            ? `Seat ${booking.seat_number}`
+            : 'Cancelled';
+        const ticketUrl = booking.status !== 'CANCELLED' ? toTicketUrl(booking.pnr) : null;
+        const detailKey = `ticket-${booking.id}`;
+        const friendlyDate = formatFriendlyDate(booking.travel_date);
+        const mobileActionMenu = renderMobileActionMenu([
+          booking.status !== 'CANCELLED'
+            ? `<button type="button" class="mobile-action-item danger cancel-btn" data-booking-id="${booking.id}" role="menuitem">Cancel ticket</button>`
+            : '',
+          ticketUrl
+            ? `<a class="mobile-action-item" href="${ticketUrl}" target="_blank" rel="noopener noreferrer" role="menuitem">Download PDF</a>`
+            : ''
+        ], `Actions for ticket ${booking.pnr}`);
+
+        return `
+          <article class="ticket-item reveal-on-scroll">
+            <div class="card-main">
+              <div class="ticket-top">
+                <div>
+                  <div class="ticket-title">${escapeHtml(booking.train_name)}</div>
+                  <p class="primary-meta"><span class="pnr-inline">PNR ${escapeHtml(booking.pnr)}</span> • ${escapeHtml(friendlyDate)}</p>
+                </div>
+                <span class="badge ${statusClass}" data-status-badge="${booking.id}">${escapeHtml(displayStatus)}</span>
+              </div>
+              <div class="route-line">
+                <div class="time-block">
+                  <span class="time-label">${escapeHtml(booking.departure_label)}</span>
+                  <span class="station-label">${escapeHtml(booking.source)}</span>
+                </div>
+                <div class="connector">
+                  <span>${escapeHtml(booking.duration_label)}</span>
+                </div>
+                <div class="time-block align-end">
+                  <span class="time-label">${escapeHtml(booking.arrival_label)}</span>
+                  <span class="station-label">${escapeHtml(booking.destination)}</span>
+                </div>
+              </div>
+              <div class="summary-metrics">
+                <div class="summary-metric emphasis">
+                  <span class="metric-label">Seat / WL</span>
+                  <strong class="metric-value ${booking.status === 'WAITING' ? 'waiting-value' : 'seat-value'}">${escapeHtml(seatInfo)}</strong>
+                </div>
+                <div class="summary-metric">
+                  <span class="metric-label">Class</span>
+                  <strong>${escapeHtml(booking.ticket_type)}</strong>
+                </div>
+                <div class="summary-metric">
+                  <span class="metric-label">Fare</span>
+                  <strong class="metric-value price-value">${escapeHtml(booking.price_label)}</strong>
+                </div>
+              </div>
+              <details class="info-drawer" data-detail-key="${detailKey}" ${state.expandedTicketDetails.has(detailKey) ? 'open' : ''}>
+                <summary class="drawer-summary">
+                  <div class="drawer-summary-main">
+                    <span class="drawer-summary-title">Passenger and booking details</span>
+                    <span class="drawer-meta">${escapeHtml(booking.passenger_name)} • ${escapeHtml(displayStatus)}</span>
+                  </div>
+                  <span class="drawer-chevron" aria-hidden="true"></span>
+                </summary>
+                <div class="drawer-content">
+                  <div class="journey-strip">
+                    <span class="journey-chip">Travel ${escapeHtml(friendlyDate)}</span>
+                    <span class="journey-chip">${escapeHtml(booking.ticket_type)}</span>
+                    <span class="journey-chip">${ticketUrl ? 'PDF ready' : 'PDF unavailable'}</span>
+                  </div>
+                  <div class="meta-grid detail-grid">
+                    <div>
+                      <strong>Passenger</strong>
+                      <span>${escapeHtml(booking.passenger_name)}</span>
+                    </div>
+                    <div>
+                      <strong>Age / Gender</strong>
+                      <span>${escapeHtml(String(booking.age || '--'))} / ${escapeHtml(booking.gender || '--')}</span>
+                    </div>
+                    <div>
+                      <strong>Status</strong>
+                      <span>${escapeHtml(displayStatus)}</span>
+                    </div>
+                    <div>
+                      <strong>Ticket PDF</strong>
+                      <span>${ticketUrl ? 'Ready to download' : 'Not available'}</span>
+                    </div>
+                  </div>
+                </div>
+              </details>
+            </div>
+            <div class="item-actions ticket-actions">
+              ${ticketUrl ? `<a class="secondary-btn ticket-primary-action" href="${ticketUrl}" target="_blank" rel="noopener noreferrer">View Ticket</a>` : ''}
+              ${booking.status !== 'CANCELLED' ? `<button type="button" class="danger-btn cancel-btn desktop-ticket-action" data-booking-id="${booking.id}">Cancel Ticket</button>` : ''}
+              ${mobileActionMenu}
+            </div>
+          </article>
+        `;
+      }).join('');
+
+      bindDrawerState(ticketsList, state.expandedTicketDetails);
+      queueRevealAnimations(ticketsList);
+    }
+
+    function renderSuggestionBox(target, stations) {
+      if (!stations.length) {
+        target.classList.remove('show');
+        target.innerHTML = '';
+        return;
+      }
+
+      target.innerHTML = stations.map((station) => `
+        <button type="button" class="suggest-item" data-station-name="${escapeHtml(station)}">${escapeHtml(station)}</button>
+      `).join('');
+      target.classList.add('show');
+    }
+
+    async function fetchStationSuggestions(query, target) {
+      if (!query.trim()) {
+        renderSuggestionBox(target, []);
+        return;
+      }
+
+      try {
+        const response = await apiFetch(`${API_BASE}/get_stations.php?q=${encodeURIComponent(query.trim())}`);
+        renderSuggestionBox(target, response.data.stations || []);
+      } catch (error) {
+        renderSuggestionBox(target, []);
+      }
+    }
+
+    function bindStationInput(input, target) {
+      input.addEventListener('input', () => {
+        window.clearTimeout(state.stationDebounce);
+        state.stationDebounce = window.setTimeout(() => {
+          fetchStationSuggestions(input.value, target);
+        }, 180);
+      });
+
+      input.addEventListener('focus', () => {
+        fetchStationSuggestions(input.value, target);
+      });
+
+      input.addEventListener('blur', () => {
+        window.setTimeout(() => target.classList.remove('show'), 140);
+      });
+    }
+
+    async function performSearch(payload, { silent = false } = {}) {
+      state.lastSearch = payload;
+      if (!silent) {
+        renderSearchSkeletons();
+        setButtonLoading(searchBtn, 'Searching...', true);
+      } else {
+        setBusyState([resultsSection, resultsList], true);
+      }
+
+      if (!silent) {
+        hideBanner(searchStatus);
+      }
+
+      try {
+        const response = await apiFetch(`${API_BASE}/search_trains.php`, {
+          method: 'POST',
+          body: JSON.stringify(payload)
+        });
+
+        state.results = response.data.trains || [];
+        state.routeMeta = response.data.meta || null;
+        renderResults(state.results);
+        renderRouteInsights(state.routeMeta, state.results);
+        if (!silent) {
+          showBanner(searchStatus, 'success', response.message);
+          revealResultsOnMobile();
+        }
+      } catch (error) {
+        if (!silent) {
+          state.results = [];
+          state.routeMeta = null;
+          renderResults([]);
+          renderRouteInsights();
+        }
+
+        showBanner(searchStatus, 'error', error.message);
+        if (!silent) {
+          revealResultsOnMobile();
+          showToast(error.message, 'error');
+        }
+      } finally {
+        if (!silent) {
+          setButtonLoading(searchBtn, 'Searching...', false);
+        } else {
+          setBusyState([resultsSection, resultsList], false);
+        }
+      }
+    }
+
+    async function loadSession() {
+      try {
+        const response = await apiFetch(`${API_BASE}/session.php`);
+        state.user = response.data.user;
+      } catch (error) {
+        state.user = null;
+      }
+
+      if (isAdminUser(state.user)) {
+        redirectToAdminPanel();
+        return;
+      }
+
+      updateNav();
+      manageStatusPolling();
+      if (state.user) {
+        await loadTickets();
+      }
+    }
+
+    async function loadTickets({ silent = false } = {}) {
+      if (!state.user) {
+        ticketsSummary.textContent = 'Login to view and manage your bookings.';
+        ticketsList.innerHTML = renderEmptyState(
+          'No bookings yet',
+          'Your bookings will appear here after you login and reserve a ticket.',
+          'Use the filters above once confirmed, waiting, and cancelled tickets start appearing.'
+        );
+        return;
+      }
+
+      if (!silent) {
+        ticketsSummary.textContent = 'Loading your latest bookings...';
+        renderTicketSkeletons();
+      } else {
+        setBusyState(ticketsList, true);
+      }
+
+      try {
+        const response = await apiFetch(`${API_BASE}/my_tickets.php?status=${encodeURIComponent(state.ticketFilter)}`);
+        const bookings = response.data.bookings || [];
+        ticketsSummary.textContent = buildTicketSummary(bookings, state.ticketFilter);
+        renderTickets(bookings);
+      } catch (error) {
+        ticketsSummary.textContent = error.message;
+        if (!silent) {
+          ticketsList.innerHTML = renderEmptyState(
+            'Tickets unavailable',
+            error.message,
+            'Check your session and API connectivity, then try again.'
+          );
+        }
+      } finally {
+        if (silent) {
+          setBusyState(ticketsList, false);
+        }
+      }
+    }
+
+    async function refreshStatuses() {
+      if (!state.user) {
+        return;
+      }
+
+      try {
+        const response = await apiFetch(`${API_BASE}/booking_status.php`);
+        const latestBookings = response.data.bookings || [];
+        const filteredBookings = state.ticketFilter === 'ALL'
+          ? latestBookings
+          : latestBookings.filter((booking) => booking.status === state.ticketFilter);
+
+        renderTickets(filteredBookings);
+        ticketsSummary.textContent = buildTicketSummary(filteredBookings, state.ticketFilter);
+        const syncedAt = response.data.updated_at
+          ? new Date(response.data.updated_at)
+          : new Date();
+        bookingStatusMeta.textContent = `Live status synced at ${syncedAt.toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit' })}.`;
+      } catch (error) {
+        bookingStatusMeta.textContent = 'Live status sync paused. Check XAMPP API connectivity.';
+      }
+    }
+
+    function manageStatusPolling() {
+      if (state.statusPoller) {
+        window.clearInterval(state.statusPoller);
+        state.statusPoller = null;
+      }
+
+      if (!state.user) {
+        return;
+      }
+
+      state.statusPoller = window.setInterval(refreshStatuses, 30000);
+    }
+
+    document.getElementById('searchForm').addEventListener('submit', async (event) => {
+      event.preventDefault();
+      const formData = new FormData(event.currentTarget);
+      const payload = {
+        from: formData.get('from').trim(),
+        to: formData.get('to').trim(),
+        date: formData.get('date')
+      };
+
+      await performSearch(payload);
+    });
+
+    resultsList.addEventListener('click', async (event) => {
+      const button = event.target.closest('.book-btn');
+      if (!button) {
+        return;
+      }
+
+      if (!state.user) {
+        openAuthModal('login');
+        showBanner(authStatus, 'info', 'Please login or register before booking a ticket.');
+        return;
+      }
+
+      if (!state.lastSearch) {
+        showBanner(searchStatus, 'error', 'Search for trains before booking.');
+        return;
+      }
+
+      const train = state.results.find((item) => String(item.id) === String(button.dataset.trainId));
+      if (!train) {
+        showBanner(searchStatus, 'error', 'Selected train could not be found. Please search again.');
+        return;
+      }
+
+      openPassengerBookingModal(train);
+    });
+
+    bookingModalContent.addEventListener('click', (event) => {
+      const option = event.target.closest('.ticket-type-option');
+      if (!option) {
+        return;
+      }
+
+      updateTicketTypeSelection(option.dataset.ticketType);
+    });
+
+    bookingModalContent.addEventListener('submit', async (event) => {
+      if (event.target.id !== 'passengerBookingForm') {
+        return;
+      }
+
+      event.preventDefault();
+
+      if (!state.user) {
+        closeBookingModal();
+        openAuthModal('login');
+        showBanner(authStatus, 'info', 'Please login or register before booking a ticket.');
+        return;
+      }
+
+      if (!state.pendingBookingTrain) {
+        showBanner(bookingModalStatus, 'error', 'Please choose a train again before booking.');
+        return;
+      }
+
+      let passengerPayload;
+      try {
+        passengerPayload = getPassengerPayload(event.target);
+      } catch (error) {
+        showBanner(bookingModalStatus, 'error', error.message);
+        return;
+      }
+
+      state.passengerDraft = {
+        passenger_name: passengerPayload.passenger_name,
+        age: String(passengerPayload.age),
+        gender: passengerPayload.gender,
+        ticket_type: passengerPayload.ticket_type
+      };
+
+      showBanner(bookingModalStatus, 'info', 'Submitting your booking request...');
+      setButtonLoading(downloadTicketBtn, 'Booking...', true);
+
+      try {
+        const response = await apiFetch(`${API_BASE}/book_ticket.php`, {
+          method: 'POST',
+          body: JSON.stringify({
+            train_id: state.pendingBookingTrain.id,
+            date: state.pendingBookingTrain.travel_date || state.lastSearch?.date,
+            request_token: generateRequestToken(),
+            ...passengerPayload
+          })
+        });
+
+        const booking = response.data.booking;
+        openBookingModal(response.message, [
+          `<strong>Train:</strong> ${escapeHtml(booking.train_name)}`,
+          `<strong>Route:</strong> ${escapeHtml(booking.source)} to ${escapeHtml(booking.destination)}`,
+          `<strong>Travel Date:</strong> ${escapeHtml(booking.travel_date)}`,
+          `<strong>Passenger:</strong> ${escapeHtml(booking.passenger_name)}`,
+          `<strong>Journey:</strong> ${escapeHtml(booking.departure_label || '')} to ${escapeHtml(booking.arrival_label || '')}`,
+          `<strong>PNR:</strong> ${escapeHtml(booking.pnr)}`,
+          `<strong>Status:</strong> ${escapeHtml(booking.display_status || booking.status)}`,
+          `<strong>Ticket Type:</strong> ${escapeHtml(booking.ticket_type)}`,
+          `<strong>Fare:</strong> ${escapeHtml(booking.price_label)}`,
+          `<strong>${booking.status === 'CONFIRMED' ? 'Seat Number' : 'WL Number'}:</strong> ${escapeHtml(String(booking.status === 'CONFIRMED' ? booking.seat_number : booking.wl_number))}`
+        ], toTicketUrl(booking.pnr));
+
+        await loadTickets({ silent: true });
+        if (state.lastSearch) {
+          await performSearch(state.lastSearch, { silent: true });
+        }
+        showBanner(searchStatus, 'success', response.message);
+        showToast(response.message, 'success');
+      } catch (error) {
+        showBanner(bookingModalStatus, 'error', error.message);
+        showBanner(searchStatus, 'error', error.message);
+        showToast(error.message, 'error');
+      } finally {
+        if (downloadTicketBtn.dataset.action === 'submit-booking') {
+          setButtonLoading(downloadTicketBtn, 'Booking...', false);
+        }
+      }
+    });
+
+    ticketsList.addEventListener('click', async (event) => {
+      const button = event.target.closest('.cancel-btn');
+      if (!button) {
+        return;
+      }
+
+      if (!window.confirm('Are you sure you want to cancel this ticket?')) {
+        return;
+      }
+
+      setButtonLoading(button, 'Cancelling...', true);
+
+      try {
+        const response = await apiFetch(`${API_BASE}/cancel_ticket.php`, {
+          method: 'POST',
+          body: JSON.stringify({ booking_id: button.dataset.bookingId })
+        });
+
+        await loadTickets({ silent: true });
+        if (state.lastSearch) {
+          await performSearch(state.lastSearch, { silent: true });
+        }
+
+        const message = response.data.promoted_booking
+          ? `${response.message} Waiting list booking ${response.data.promoted_booking.pnr} has been promoted.`
+          : response.message;
+        showBanner(searchStatus, 'success', message);
+        showToast(message, 'success');
+      } catch (error) {
+        showBanner(searchStatus, 'error', error.message);
+        showToast(error.message, 'error');
+      } finally {
+        setButtonLoading(button, 'Cancelling...', false);
+      }
+    });
+
+    document.querySelectorAll('[data-auth-open]').forEach((button) => {
+      button.addEventListener('click', () => {
+        closeNavMenu();
+        openAuthModal(button.dataset.authOpen);
+      });
+    });
+
+    document.querySelectorAll('[data-auth-tab]').forEach((button) => {
+      button.addEventListener('click', () => switchAuthTab(button.dataset.authTab));
+    });
+
+    document.querySelectorAll('[data-close-modal]').forEach((button) => {
+      button.addEventListener('click', closeAuthModal);
+    });
+
+    document.querySelectorAll('[data-close-booking]').forEach((button) => {
+      button.addEventListener('click', closeBookingModal);
+    });
+
+    authModal.addEventListener('click', (event) => {
+      if (event.target === authModal) {
+        closeAuthModal();
+      }
+    });
+
+    bookingModal.addEventListener('click', (event) => {
+      if (event.target === bookingModal) {
+        closeBookingModal();
+      }
+    });
+
+    document.getElementById('loginForm').addEventListener('submit', async (event) => {
+      event.preventDefault();
+      const formData = new FormData(event.currentTarget);
+      const submitButton = event.currentTarget.querySelector('.primary-btn');
+      setButtonLoading(submitButton, 'Signing in...', true);
+
+      try {
+        const response = await apiFetch(`${API_BASE}/login.php`, {
+          method: 'POST',
+          body: JSON.stringify({
+            email: formData.get('email'),
+            password: formData.get('password')
+          })
+        });
+
+        state.user = response.data.user;
+        if (isAdminUser(state.user)) {
+          redirectToAdminPanel();
+          return;
+        }
+
+        updateNav();
+        manageStatusPolling();
+        await loadTickets();
+        showBanner(authStatus, 'success', response.message);
+        showToast(response.message, 'success');
+        window.setTimeout(closeAuthModal, 700);
+      } catch (error) {
+        showBanner(authStatus, 'error', error.message);
+        showToast(error.message, 'error');
+      } finally {
+        setButtonLoading(submitButton, 'Signing in...', false);
+      }
+    });
+
+    document.getElementById('registerForm').addEventListener('submit', async (event) => {
+      event.preventDefault();
+      const formData = new FormData(event.currentTarget);
+      const submitButton = event.currentTarget.querySelector('.primary-btn');
+      setButtonLoading(submitButton, 'Creating account...', true);
+
+      try {
+        const response = await apiFetch(`${API_BASE}/register.php`, {
+          method: 'POST',
+          body: JSON.stringify({
+            name: formData.get('name'),
+            email: formData.get('email'),
+            password: formData.get('password')
+          })
+        });
+
+        state.user = response.data.user;
+        updateNav();
+        manageStatusPolling();
+        await loadTickets();
+        showBanner(authStatus, 'success', response.message);
+        showToast(response.message, 'success');
+        window.setTimeout(closeAuthModal, 700);
+      } catch (error) {
+        showBanner(authStatus, 'error', error.message);
+        showToast(error.message, 'error');
+      } finally {
+        setButtonLoading(submitButton, 'Creating account...', false);
+      }
+    });
+
+    document.getElementById('logoutBtn').addEventListener('click', async () => {
+      const logoutButton = document.getElementById('logoutBtn');
+      try {
+        closeNavMenu();
+        setButtonLoading(logoutButton, 'Logging out...', true);
+        await apiFetch(`${API_BASE}/logout.php`, { method: 'POST', body: JSON.stringify({}) });
+        state.user = null;
+        updateNav();
+        manageStatusPolling();
+        await loadTickets();
+        showBanner(searchStatus, 'info', 'You have been logged out successfully.');
+        showToast('You have been logged out successfully.', 'info');
+      } catch (error) {
+        showBanner(searchStatus, 'error', error.message);
+        showToast(error.message, 'error');
+      } finally {
+        setButtonLoading(logoutButton, 'Logging out...', false);
+      }
+    });
+
+    document.getElementById('myTicketsNav').addEventListener('click', async () => {
+      closeNavMenu();
+      await loadTickets();
+    });
+
+    downloadTicketBtn.addEventListener('click', () => {
+      if (downloadTicketBtn.dataset.action === 'download' && state.lastTicketUrl) {
+        window.open(state.lastTicketUrl, '_blank', 'noopener');
+      }
+    });
+
+    quickDates.addEventListener('click', (event) => {
+      const button = event.target.closest('[data-date-value]');
+      if (!button) {
+        return;
+      }
+
+      dateInput.value = button.dataset.dateValue;
+      renderQuickDates();
+      if (state.routeMeta) {
+        renderRouteInsights(state.routeMeta, state.results);
+      }
+    });
+
+    routeInsights.addEventListener('click', async (event) => {
+      const button = event.target.closest('[data-date-value]');
+      if (!button) {
+        return;
+      }
+
+      dateInput.value = button.dataset.dateValue;
+      renderQuickDates();
+      if (state.lastSearch) {
+        await performSearch({
+          ...state.lastSearch,
+          date: button.dataset.dateValue
+        });
+      }
+    });
+
+    document.querySelectorAll('.nav-menu a, .nav-menu button').forEach((element) => {
+      element.addEventListener('click', () => {
+        if (window.innerWidth < 768) {
+          closeNavMenu();
+        }
+      });
+    });
+
+    window.addEventListener('resize', () => {
+      if (window.innerWidth >= 768) {
+        closeNavMenu();
+      }
+      syncResponsiveDrawers();
+      closeOverflowMenus();
+    });
+
+    navToggle?.addEventListener('change', syncNavToggleState);
+
+    document.addEventListener('click', (event) => {
+      if (!navToggle?.checked || window.innerWidth >= 768) {
+        return;
+      }
+
+      if (!event.target.closest('.nav-inner')) {
+        closeNavMenu();
+      }
+    });
+
+    document.addEventListener('keydown', (event) => {
+      if (event.key !== 'Escape') {
+        return;
+      }
+
+      if (bookingModal.classList.contains('show')) {
+        closeBookingModal();
+        return;
+      }
+
+      if (authModal.classList.contains('show')) {
+        closeAuthModal();
+        return;
+      }
+
+      if (navToggle?.checked) {
+        closeNavMenu();
+      }
+
+      closeOverflowMenus();
+    });
+
+    document.addEventListener('click', (event) => {
+      const toggle = event.target.closest('[data-overflow-toggle]');
+      if (toggle) {
+        const menu = toggle.closest('[data-overflow-menu]');
+        const shouldOpen = !menu.classList.contains('is-open');
+        closeOverflowMenus(menu);
+        menu.classList.toggle('is-open', shouldOpen);
+        toggle.setAttribute('aria-expanded', String(shouldOpen));
+        return;
+      }
+
+      if (event.target.closest('.mobile-action-item')) {
+        closeOverflowMenus();
+        return;
+      }
+
+      if (!event.target.closest('[data-overflow-menu]')) {
+        closeOverflowMenus();
+      }
+    });
+
+    document.getElementById('ticketFilters').addEventListener('click', async (event) => {
+      const button = event.target.closest('[data-ticket-filter]');
+      if (!button) {
+        return;
+      }
+
+      state.ticketFilter = button.dataset.ticketFilter;
+      document.querySelectorAll('[data-ticket-filter]').forEach((item) => {
+        item.classList.toggle('active', item.dataset.ticketFilter === state.ticketFilter);
+      });
+      await loadTickets();
+    });
+
+    fromSuggestions.addEventListener('click', (event) => {
+      const button = event.target.closest('[data-station-name]');
+      if (!button) {
+        return;
+      }
+
+      fromInput.value = button.dataset.stationName;
+      fromSuggestions.classList.remove('show');
+    });
+
+    toSuggestions.addEventListener('click', (event) => {
+      const button = event.target.closest('[data-station-name]');
+      if (!button) {
+        return;
+      }
+
+      toInput.value = button.dataset.stationName;
+      toSuggestions.classList.remove('show');
+    });
+
+    bindStationInput(fromInput, fromSuggestions);
+    bindStationInput(toInput, toSuggestions);
+
+    dateInput.min = toLocalIsoDate();
+    dateInput.value = dateInput.min;
+    renderQuickDates();
+    syncResponsiveDrawers();
+    syncInsightsDrawer(false);
+    syncNavToggleState();
+    queueRevealAnimations(document);
+
+    if (window.location.protocol === 'file:') {
+      showBanner(searchStatus, 'error', 'Open IndianRail through XAMPP/Apache, not by double-clicking the HTML file.');
+    }
+
+    consumeAuthNotice();
+    loadSession();
+  </script>
+</body>
+</html>

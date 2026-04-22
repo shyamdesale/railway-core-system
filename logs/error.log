@@ -1,0 +1,363 @@
+
+[04-Apr-2026 09:12:48 UTC] Database connection failed: SQLSTATE[HY000] [2002] Operation not permitted
+[04-Apr-2026 09:12:48 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[HY000] [2002] Operation not permitted in /Applications/XAMPP/xamppfiles/htdocs/project/config/db.php:22
+Stack trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/project/config/db.php(22): PDO->__construct('mysql:host=127....', 'root', Object(SensitiveParameterValue), Array)
+#1 /Applications/XAMPP/xamppfiles/htdocs/project/api/search_trains.php(16): getPDO()
+#2 Command line code(1): include('/Applications/X...')
+#3 {main}
+
+Next RuntimeException: Database connection failed. Start MySQL in XAMPP, import database/minirail.sql, and verify config/db.php credentials. in /Applications/XAMPP/xamppfiles/htdocs/project/config/db.php:29
+Stack trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/project/api/search_trains.php(16): getPDO()
+#1 Command line code(1): include('/Applications/X...')
+#2 {main}
+  thrown in /Applications/XAMPP/xamppfiles/htdocs/project/config/db.php on line 29
+[04-Apr-2026 09:12:48 UTC] API Fatal Error: Uncaught PDOException: SQLSTATE[HY000] [2002] Operation not permitted in /Applications/XAMPP/xamppfiles/htdocs/project/config/db.php:22
+Stack trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/project/config/db.php(22): PDO->__construct('mysql:host=127....', 'root', Object(SensitiveParameterValue), Array)
+#1 /Applications/XAMPP/xamppfiles/htdocs/project/api/search_trains.php(16): getPDO()
+#2 Command line code(1): include('/Applications/X...')
+#3 {main}
+
+Next RuntimeException: Database connection failed. Start MySQL in XAMPP, import database/minirail.sql, and verify config/db.php credentials. in /Applications/XAMPP/xamppfiles/htdocs/project/config/db.php:29
+Stack trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/project/api/search_trains.php(16): getPDO()
+#1 Command line code(1): include('/Applications/X...')
+#2 {main}
+  thrown in /Applications/XAMPP/xamppfiles/htdocs/project/config/db.php:29
+[04-Apr-2026 09:13:00 UTC] MiniRail log test
+[07-Apr-2026 08:44:56 UTC] Unhandled API exception: SQLSTATE[42000]: Syntax error or access violation: 1061 Duplicate key name 'idx_route_lookup' in /Users/shyamraosahebdesale/Documents/project/config/db.php:393 #0 /Users/shyamraosahebdesale/Documents/project/config/db.php(393): PDO->exec('CREATE INDEX id...')
+#1 /Users/shyamraosahebdesale/Documents/project/config/db.php(280): ensureIndex(Object(PDO), 'trains', Array, 'CREATE INDEX id...')
+#2 /Users/shyamraosahebdesale/Documents/project/config/db.php(61): ensureDatabaseIndexes(Object(PDO))
+#3 /Users/shyamraosahebdesale/Documents/project/config/db.php(51): ensureDatabaseSchema(Object(PDO))
+#4 /Users/shyamraosahebdesale/Documents/project/api/get_stations.php(10): getPDO()
+#5 {main}
+[07-Apr-2026 08:45:18 UTC] Unhandled API exception: SQLSTATE[42000]: Syntax error or access violation: 1061 Duplicate key name 'idx_route_lookup' in /Users/shyamraosahebdesale/Documents/project/config/db.php:393 #0 /Users/shyamraosahebdesale/Documents/project/config/db.php(393): PDO->exec('CREATE INDEX id...')
+#1 /Users/shyamraosahebdesale/Documents/project/config/db.php(280): ensureIndex(Object(PDO), 'trains', Array, 'CREATE INDEX id...')
+#2 /Users/shyamraosahebdesale/Documents/project/config/db.php(61): ensureDatabaseIndexes(Object(PDO))
+#3 /Users/shyamraosahebdesale/Documents/project/config/db.php(51): ensureDatabaseSchema(Object(PDO))
+#4 /Users/shyamraosahebdesale/Documents/project/api/get_stations.php(10): getPDO()
+#5 {main}
+[07-Apr-2026 08:45:23 UTC] Unhandled API exception: SQLSTATE[42000]: Syntax error or access violation: 1061 Duplicate key name 'idx_route_lookup' in /Users/shyamraosahebdesale/Documents/project/config/db.php:393 #0 /Users/shyamraosahebdesale/Documents/project/config/db.php(393): PDO->exec('CREATE INDEX id...')
+#1 /Users/shyamraosahebdesale/Documents/project/config/db.php(280): ensureIndex(Object(PDO), 'trains', Array, 'CREATE INDEX id...')
+#2 /Users/shyamraosahebdesale/Documents/project/config/db.php(61): ensureDatabaseIndexes(Object(PDO))
+#3 /Users/shyamraosahebdesale/Documents/project/config/db.php(51): ensureDatabaseSchema(Object(PDO))
+#4 /Users/shyamraosahebdesale/Documents/project/api/get_stations.php(10): getPDO()
+#5 {main}
+[07-Apr-2026 08:45:51 UTC] Unhandled API exception: SQLSTATE[42000]: Syntax error or access violation: 1061 Duplicate key name 'idx_route_lookup' in /Users/shyamraosahebdesale/Documents/project/config/db.php:393 #0 /Users/shyamraosahebdesale/Documents/project/config/db.php(393): PDO->exec('CREATE INDEX id...')
+#1 /Users/shyamraosahebdesale/Documents/project/config/db.php(280): ensureIndex(Object(PDO), 'trains', Array, 'CREATE INDEX id...')
+#2 /Users/shyamraosahebdesale/Documents/project/config/db.php(61): ensureDatabaseIndexes(Object(PDO))
+#3 /Users/shyamraosahebdesale/Documents/project/config/db.php(51): ensureDatabaseSchema(Object(PDO))
+#4 /Users/shyamraosahebdesale/Documents/project/api/helpers.php(444): getPDO()
+#5 /Users/shyamraosahebdesale/Documents/project/api/helpers.php(459): currentUser()
+#6 /Users/shyamraosahebdesale/Documents/project/api/booking_status.php(9): requireLogin()
+#7 {main}
+[07-Apr-2026 08:46:19 UTC] Unhandled API exception: SQLSTATE[42000]: Syntax error or access violation: 1061 Duplicate key name 'idx_route_lookup' in /Users/shyamraosahebdesale/Documents/project/config/db.php:393 #0 /Users/shyamraosahebdesale/Documents/project/config/db.php(393): PDO->exec('CREATE INDEX id...')
+#1 /Users/shyamraosahebdesale/Documents/project/config/db.php(280): ensureIndex(Object(PDO), 'trains', Array, 'CREATE INDEX id...')
+#2 /Users/shyamraosahebdesale/Documents/project/config/db.php(61): ensureDatabaseIndexes(Object(PDO))
+#3 /Users/shyamraosahebdesale/Documents/project/config/db.php(51): ensureDatabaseSchema(Object(PDO))
+#4 /Users/shyamraosahebdesale/Documents/project/api/get_stations.php(10): getPDO()
+#5 {main}
+[07-Apr-2026 08:46:21 UTC] Unhandled API exception: SQLSTATE[42000]: Syntax error or access violation: 1061 Duplicate key name 'idx_route_lookup' in /Users/shyamraosahebdesale/Documents/project/config/db.php:393 #0 /Users/shyamraosahebdesale/Documents/project/config/db.php(393): PDO->exec('CREATE INDEX id...')
+#1 /Users/shyamraosahebdesale/Documents/project/config/db.php(280): ensureIndex(Object(PDO), 'trains', Array, 'CREATE INDEX id...')
+#2 /Users/shyamraosahebdesale/Documents/project/config/db.php(61): ensureDatabaseIndexes(Object(PDO))
+#3 /Users/shyamraosahebdesale/Documents/project/config/db.php(51): ensureDatabaseSchema(Object(PDO))
+#4 /Users/shyamraosahebdesale/Documents/project/api/helpers.php(444): getPDO()
+#5 /Users/shyamraosahebdesale/Documents/project/api/helpers.php(459): currentUser()
+#6 /Users/shyamraosahebdesale/Documents/project/api/booking_status.php(9): requireLogin()
+#7 {main}
+[07-Apr-2026 08:46:25 UTC] Unhandled API exception: SQLSTATE[42000]: Syntax error or access violation: 1061 Duplicate key name 'idx_route_lookup' in /Users/shyamraosahebdesale/Documents/project/config/db.php:393 #0 /Users/shyamraosahebdesale/Documents/project/config/db.php(393): PDO->exec('CREATE INDEX id...')
+#1 /Users/shyamraosahebdesale/Documents/project/config/db.php(280): ensureIndex(Object(PDO), 'trains', Array, 'CREATE INDEX id...')
+#2 /Users/shyamraosahebdesale/Documents/project/config/db.php(61): ensureDatabaseIndexes(Object(PDO))
+#3 /Users/shyamraosahebdesale/Documents/project/config/db.php(51): ensureDatabaseSchema(Object(PDO))
+#4 /Users/shyamraosahebdesale/Documents/project/api/get_stations.php(10): getPDO()
+#5 {main}
+[07-Apr-2026 08:50:04 UTC] Unhandled API exception: SQLSTATE[42000]: Syntax error or access violation: 1061 Duplicate key name 'idx_route_lookup' in /Users/shyamraosahebdesale/Documents/project/config/db.php:393 #0 /Users/shyamraosahebdesale/Documents/project/config/db.php(393): PDO->exec('CREATE INDEX id...')
+#1 /Users/shyamraosahebdesale/Documents/project/config/db.php(280): ensureIndex(Object(PDO), 'trains', Array, 'CREATE INDEX id...')
+#2 /Users/shyamraosahebdesale/Documents/project/config/db.php(61): ensureDatabaseIndexes(Object(PDO))
+#3 /Users/shyamraosahebdesale/Documents/project/config/db.php(51): ensureDatabaseSchema(Object(PDO))
+#4 /Users/shyamraosahebdesale/Documents/project/api/get_stations.php(9): getPDO()
+#5 {main}
+[07-Apr-2026 10:51:03 UTC] Unhandled API exception: Undefined array key "created_at" in /Users/shyamraosahebdesale/Documents/project/api/admin/common.php:116 #0 /Users/shyamraosahebdesale/Documents/project/api/admin/common.php(116): {closure:bootApi():88}(2, 'Undefined array...', '/Users/shyamrao...', 116)
+#1 /Users/shyamraosahebdesale/Documents/project/api/admin/common.php(281): hydrateTrainRow(Array)
+#2 /Users/shyamraosahebdesale/Documents/project/api/admin/trains.php(29): saveAdminTrain(Object(PDO), Array)
+#3 {main}
+[08-Apr-2026 07:34:27 UTC] Unhandled API exception: SQLSTATE[HY000] [2002] Connection refused in /Users/shyamraosahebdesale/Documents/project/config/db.php:25 #0 /Users/shyamraosahebdesale/Documents/project/config/db.php(25): PDO->__construct('mysql:host=127....', 'root', Object(SensitiveParameterValue), Array)
+#1 /Users/shyamraosahebdesale/Documents/project/api/get_stations.php(9): getPDO()
+#2 {main}
+[09-Apr-2026 21:34:40 Europe/Berlin] Unhandled API exception: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'wl_number' in 'field list' in /Applications/XAMPP/xamppfiles/htdocs/railway_core_system/config/db.php:524 #0 /Applications/XAMPP/xamppfiles/htdocs/railway_core_system/config/db.php(524): PDO->prepare('SELECT id, wl_n...')
+#1 /Applications/XAMPP/xamppfiles/htdocs/railway_core_system/config/db.php(291): backfillLegacyData(Object(PDO))
+#2 /Applications/XAMPP/xamppfiles/htdocs/railway_core_system/config/db.php(60): syncLegacySchema(Object(PDO))
+#3 /Applications/XAMPP/xamppfiles/htdocs/railway_core_system/config/db.php(51): ensureDatabaseSchema(Object(PDO))
+#4 /Applications/XAMPP/xamppfiles/htdocs/railway_core_system/api/get_stations.php(9): getPDO()
+#5 {main}
+[09-Apr-2026 21:34:47 Europe/Berlin] Unhandled API exception: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'wl_number' in 'field list' in /Applications/XAMPP/xamppfiles/htdocs/railway_core_system/config/db.php:524 #0 /Applications/XAMPP/xamppfiles/htdocs/railway_core_system/config/db.php(524): PDO->prepare('SELECT id, wl_n...')
+#1 /Applications/XAMPP/xamppfiles/htdocs/railway_core_system/config/db.php(291): backfillLegacyData(Object(PDO))
+#2 /Applications/XAMPP/xamppfiles/htdocs/railway_core_system/config/db.php(60): syncLegacySchema(Object(PDO))
+#3 /Applications/XAMPP/xamppfiles/htdocs/railway_core_system/config/db.php(51): ensureDatabaseSchema(Object(PDO))
+#4 /Applications/XAMPP/xamppfiles/htdocs/railway_core_system/api/get_stations.php(9): getPDO()
+#5 {main}
+[09-Apr-2026 21:34:48 Europe/Berlin] Unhandled API exception: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'wl_number' in 'field list' in /Applications/XAMPP/xamppfiles/htdocs/railway_core_system/config/db.php:524 #0 /Applications/XAMPP/xamppfiles/htdocs/railway_core_system/config/db.php(524): PDO->prepare('SELECT id, wl_n...')
+#1 /Applications/XAMPP/xamppfiles/htdocs/railway_core_system/config/db.php(291): backfillLegacyData(Object(PDO))
+#2 /Applications/XAMPP/xamppfiles/htdocs/railway_core_system/config/db.php(60): syncLegacySchema(Object(PDO))
+#3 /Applications/XAMPP/xamppfiles/htdocs/railway_core_system/config/db.php(51): ensureDatabaseSchema(Object(PDO))
+#4 /Applications/XAMPP/xamppfiles/htdocs/railway_core_system/api/search_trains.php(9): getPDO()
+#5 {main}
+[09-Apr-2026 21:35:46 Europe/Berlin] Unhandled API exception: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'wl_number' in 'field list' in /Applications/XAMPP/xamppfiles/htdocs/railway_core_system/config/db.php:524 #0 /Applications/XAMPP/xamppfiles/htdocs/railway_core_system/config/db.php(524): PDO->prepare('SELECT id, wl_n...')
+#1 /Applications/XAMPP/xamppfiles/htdocs/railway_core_system/config/db.php(291): backfillLegacyData(Object(PDO))
+#2 /Applications/XAMPP/xamppfiles/htdocs/railway_core_system/config/db.php(60): syncLegacySchema(Object(PDO))
+#3 /Applications/XAMPP/xamppfiles/htdocs/railway_core_system/config/db.php(51): ensureDatabaseSchema(Object(PDO))
+#4 /Applications/XAMPP/xamppfiles/htdocs/railway_core_system/api/login.php(9): getPDO()
+#5 {main}
+[09-Apr-2026 21:38:45 Europe/Berlin] Unhandled API exception: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'wl_number' in 'field list' in /Applications/XAMPP/xamppfiles/htdocs/railway_core_system/config/db.php:524 #0 /Applications/XAMPP/xamppfiles/htdocs/railway_core_system/config/db.php(524): PDO->prepare('SELECT id, wl_n...')
+#1 /Applications/XAMPP/xamppfiles/htdocs/railway_core_system/config/db.php(291): backfillLegacyData(Object(PDO))
+#2 /Applications/XAMPP/xamppfiles/htdocs/railway_core_system/config/db.php(60): syncLegacySchema(Object(PDO))
+#3 /Applications/XAMPP/xamppfiles/htdocs/railway_core_system/config/db.php(51): ensureDatabaseSchema(Object(PDO))
+#4 /Applications/XAMPP/xamppfiles/htdocs/railway_core_system/api/get_stations.php(9): getPDO()
+#5 {main}
+[09-Apr-2026 21:39:09 Europe/Berlin] Unhandled API exception: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'wl_number' in 'field list' in /Applications/XAMPP/xamppfiles/htdocs/railway_core_system/config/db.php:524 #0 /Applications/XAMPP/xamppfiles/htdocs/railway_core_system/config/db.php(524): PDO->prepare('SELECT id, wl_n...')
+#1 /Applications/XAMPP/xamppfiles/htdocs/railway_core_system/config/db.php(291): backfillLegacyData(Object(PDO))
+#2 /Applications/XAMPP/xamppfiles/htdocs/railway_core_system/config/db.php(60): syncLegacySchema(Object(PDO))
+#3 /Applications/XAMPP/xamppfiles/htdocs/railway_core_system/config/db.php(51): ensureDatabaseSchema(Object(PDO))
+#4 /Applications/XAMPP/xamppfiles/htdocs/railway_core_system/api/get_stations.php(9): getPDO()
+#5 {main}
+[09-Apr-2026 21:39:28 Europe/Berlin] Unhandled API exception: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'wl_number' in 'field list' in /Applications/XAMPP/xamppfiles/htdocs/railway_core_system/config/db.php:524 #0 /Applications/XAMPP/xamppfiles/htdocs/railway_core_system/config/db.php(524): PDO->prepare('SELECT id, wl_n...')
+#1 /Applications/XAMPP/xamppfiles/htdocs/railway_core_system/config/db.php(291): backfillLegacyData(Object(PDO))
+#2 /Applications/XAMPP/xamppfiles/htdocs/railway_core_system/config/db.php(60): syncLegacySchema(Object(PDO))
+#3 /Applications/XAMPP/xamppfiles/htdocs/railway_core_system/config/db.php(51): ensureDatabaseSchema(Object(PDO))
+#4 /Applications/XAMPP/xamppfiles/htdocs/railway_core_system/api/login.php(9): getPDO()
+#5 {main}
+[09-Apr-2026 21:39:50 Europe/Berlin] Unhandled API exception: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'wl_number' in 'field list' in /Applications/XAMPP/xamppfiles/htdocs/railway_core_system/config/db.php:524 #0 /Applications/XAMPP/xamppfiles/htdocs/railway_core_system/config/db.php(524): PDO->prepare('SELECT id, wl_n...')
+#1 /Applications/XAMPP/xamppfiles/htdocs/railway_core_system/config/db.php(291): backfillLegacyData(Object(PDO))
+#2 /Applications/XAMPP/xamppfiles/htdocs/railway_core_system/config/db.php(60): syncLegacySchema(Object(PDO))
+#3 /Applications/XAMPP/xamppfiles/htdocs/railway_core_system/config/db.php(51): ensureDatabaseSchema(Object(PDO))
+#4 /Applications/XAMPP/xamppfiles/htdocs/railway_core_system/api/get_stations.php(9): getPDO()
+#5 {main}
+[09-Apr-2026 21:42:04 Europe/Berlin] Unhandled API exception: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'wl_number' in 'field list' in /Applications/XAMPP/xamppfiles/htdocs/railway_core_system/config/db.php:524 #0 /Applications/XAMPP/xamppfiles/htdocs/railway_core_system/config/db.php(524): PDO->prepare('SELECT id, wl_n...')
+#1 /Applications/XAMPP/xamppfiles/htdocs/railway_core_system/config/db.php(291): backfillLegacyData(Object(PDO))
+#2 /Applications/XAMPP/xamppfiles/htdocs/railway_core_system/config/db.php(60): syncLegacySchema(Object(PDO))
+#3 /Applications/XAMPP/xamppfiles/htdocs/railway_core_system/config/db.php(51): ensureDatabaseSchema(Object(PDO))
+#4 /Applications/XAMPP/xamppfiles/htdocs/railway_core_system/api/get_stations.php(9): getPDO()
+#5 {main}
+[09-Apr-2026 21:42:05 Europe/Berlin] Unhandled API exception: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'wl_number' in 'field list' in /Applications/XAMPP/xamppfiles/htdocs/railway_core_system/config/db.php:524 #0 /Applications/XAMPP/xamppfiles/htdocs/railway_core_system/config/db.php(524): PDO->prepare('SELECT id, wl_n...')
+#1 /Applications/XAMPP/xamppfiles/htdocs/railway_core_system/config/db.php(291): backfillLegacyData(Object(PDO))
+#2 /Applications/XAMPP/xamppfiles/htdocs/railway_core_system/config/db.php(60): syncLegacySchema(Object(PDO))
+#3 /Applications/XAMPP/xamppfiles/htdocs/railway_core_system/config/db.php(51): ensureDatabaseSchema(Object(PDO))
+#4 /Applications/XAMPP/xamppfiles/htdocs/railway_core_system/api/get_stations.php(9): getPDO()
+#5 {main}
+[09-Apr-2026 21:42:06 Europe/Berlin] Unhandled API exception: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'wl_number' in 'field list' in /Applications/XAMPP/xamppfiles/htdocs/railway_core_system/config/db.php:524 #0 /Applications/XAMPP/xamppfiles/htdocs/railway_core_system/config/db.php(524): PDO->prepare('SELECT id, wl_n...')
+#1 /Applications/XAMPP/xamppfiles/htdocs/railway_core_system/config/db.php(291): backfillLegacyData(Object(PDO))
+#2 /Applications/XAMPP/xamppfiles/htdocs/railway_core_system/config/db.php(60): syncLegacySchema(Object(PDO))
+#3 /Applications/XAMPP/xamppfiles/htdocs/railway_core_system/config/db.php(51): ensureDatabaseSchema(Object(PDO))
+#4 /Applications/XAMPP/xamppfiles/htdocs/railway_core_system/api/search_trains.php(9): getPDO()
+#5 {main}
+[09-Apr-2026 21:53:27 Europe/Berlin] Unhandled API exception: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'wl_number' in 'field list' in /Applications/XAMPP/xamppfiles/htdocs/railway_core_system/config/db.php:524 #0 /Applications/XAMPP/xamppfiles/htdocs/railway_core_system/config/db.php(524): PDO->prepare('SELECT id, wl_n...')
+#1 /Applications/XAMPP/xamppfiles/htdocs/railway_core_system/config/db.php(291): backfillLegacyData(Object(PDO))
+#2 /Applications/XAMPP/xamppfiles/htdocs/railway_core_system/config/db.php(60): syncLegacySchema(Object(PDO))
+#3 /Applications/XAMPP/xamppfiles/htdocs/railway_core_system/config/db.php(51): ensureDatabaseSchema(Object(PDO))
+#4 /Applications/XAMPP/xamppfiles/htdocs/railway_core_system/api/get_stations.php(9): getPDO()
+#5 {main}
+[09-Apr-2026 22:07:54 Europe/Berlin] Unhandled API exception: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'wl_number' in 'field list' in /Applications/XAMPP/xamppfiles/htdocs/railway_core_system/config/db.php:524 #0 /Applications/XAMPP/xamppfiles/htdocs/railway_core_system/config/db.php(524): PDO->prepare('SELECT id, wl_n...')
+#1 /Applications/XAMPP/xamppfiles/htdocs/railway_core_system/config/db.php(291): backfillLegacyData(Object(PDO))
+#2 /Applications/XAMPP/xamppfiles/htdocs/railway_core_system/config/db.php(60): syncLegacySchema(Object(PDO))
+#3 /Applications/XAMPP/xamppfiles/htdocs/railway_core_system/config/db.php(51): ensureDatabaseSchema(Object(PDO))
+#4 /Applications/XAMPP/xamppfiles/htdocs/railway_core_system/api/get_stations.php(9): getPDO()
+#5 {main}
+[2026-04-09T22:12:48+02:00] [db:connection] SQLSTATE[HY000] [2002] Operation not permitted in /Applications/XAMPP/xamppfiles/htdocs/railway_core_system/config/db.php:25 #0 /Applications/XAMPP/xamppfiles/htdocs/railway_core_system/config/db.php(25): PDO->__construct('mysql:host=127....', 'root', Object(SensitiveParameterValue), Array)
+#1 /Applications/XAMPP/xamppfiles/htdocs/railway_core_system/config/db.php(78): createPdoConnection('mysql:host=127....')
+#2 /Applications/XAMPP/xamppfiles/htdocs/railway_core_system/api/get_stations.php(9): getPDO()
+#3 Command line code(1): include('/Applications/X...')
+#4 {main}
+[09-Apr-2026 22:12:48 Europe/Berlin] PHP Fatal error:  Uncaught PDOException: SQLSTATE[HY000] [2002] Operation not permitted in /Applications/XAMPP/xamppfiles/htdocs/railway_core_system/config/db.php:25
+Stack trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/railway_core_system/config/db.php(25): PDO->__construct('mysql:host=127....', 'root', Object(SensitiveParameterValue), Array)
+#1 /Applications/XAMPP/xamppfiles/htdocs/railway_core_system/config/db.php(78): createPdoConnection('mysql:host=127....')
+#2 /Applications/XAMPP/xamppfiles/htdocs/railway_core_system/api/get_stations.php(9): getPDO()
+#3 Command line code(1): include('/Applications/X...')
+#4 {main}
+
+Next RuntimeException: Database connection failed. Verify that MySQL is running and that config/db.php credentials are correct. in /Applications/XAMPP/xamppfiles/htdocs/railway_core_system/config/db.php:87
+Stack trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/railway_core_system/api/get_stations.php(9): getPDO()
+#1 Command line code(1): include('/Applications/X...')
+#2 {main}
+  thrown in /Applications/XAMPP/xamppfiles/htdocs/railway_core_system/config/db.php on line 87
+[09-Apr-2026 22:12:48 Europe/Berlin] [request_id=1fcacd3529fe2b2b] [fatal] [GET /api/get_stations.php?q=d] Uncaught PDOException: SQLSTATE[HY000] [2002] Operation not permitted in /Applications/XAMPP/xamppfiles/htdocs/railway_core_system/config/db.php:25
+Stack trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/railway_core_system/config/db.php(25): PDO->__construct('mysql:host=127....', 'root', Object(SensitiveParameterValue), Array)
+#1 /Applications/XAMPP/xamppfiles/htdocs/railway_core_system/config/db.php(78): createPdoConnection('mysql:host=127....')
+#2 /Applications/XAMPP/xamppfiles/htdocs/railway_core_system/api/get_stations.php(9): getPDO()
+#3 Command line code(1): include('/Applications/X...')
+#4 {main}
+
+Next RuntimeException: Database connection failed. Verify that MySQL is running and that config/db.php credentials are correct. in /Applications/XAMPP/xamppfiles/htdocs/railway_core_system/config/db.php:87
+Stack trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/railway_core_system/api/get_stations.php(9): getPDO()
+#1 Command line code(1): include('/Applications/X...')
+#2 {main}
+  thrown in /Applications/XAMPP/xamppfiles/htdocs/railway_core_system/config/db.php:87
+[09-Apr-2026 22:13:03 Europe/Berlin] [request_id=de37975a49c88175] [unhandled_exception] [GET /api/get_stations.php?q=d] SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '\" THEN 0 ELSE 1 END,
+        station_name ASC
+     LIMIT 8' at line 7 in /Applications/XAMPP/xamppfiles/htdocs/railway_core_system/api/get_stations.php:34 #0 /Applications/XAMPP/xamppfiles/htdocs/railway_core_system/api/get_stations.php(34): PDO->prepare('SELECT station_...')
+#1 {main}
+[09-Apr-2026 22:13:06 Europe/Berlin] [request_id=6ffb1b53f573fc07] [unhandled_exception] [GET /api/get_stations.php?q=d] SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '\" THEN 0 ELSE 1 END,
+        station_name ASC
+     LIMIT 8' at line 7 in /Applications/XAMPP/xamppfiles/htdocs/railway_core_system/api/get_stations.php:34 #0 /Applications/XAMPP/xamppfiles/htdocs/railway_core_system/api/get_stations.php(34): PDO->prepare('SELECT station_...')
+#1 {main}
+[09-Apr-2026 22:13:08 Europe/Berlin] [request_id=5eb8f00e9e24ec1a] [unhandled_exception] [GET /api/get_stations.php?q=de] SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '\" THEN 0 ELSE 1 END,
+        station_name ASC
+     LIMIT 8' at line 7 in /Applications/XAMPP/xamppfiles/htdocs/railway_core_system/api/get_stations.php:34 #0 /Applications/XAMPP/xamppfiles/htdocs/railway_core_system/api/get_stations.php(34): PDO->prepare('SELECT station_...')
+#1 {main}
+[09-Apr-2026 22:13:52 Europe/Berlin] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '\" THEN 0 ELSE 1 END,
+        station_name ASC
+     LIMIT 8' at line 7 in /Applications/XAMPP/xamppfiles/htdocs/railway_core_system/api/get_stations.php:34
+Stack trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/railway_core_system/api/get_stations.php(34): PDO->prepare('SELECT station_...')
+#1 Command line code(1): include('/Applications/X...')
+#2 {main}
+  thrown in /Applications/XAMPP/xamppfiles/htdocs/railway_core_system/api/get_stations.php on line 34
+[09-Apr-2026 22:13:52 Europe/Berlin] [request_id=1c19c684b1bf1d8a] [fatal] [GET /api/get_stations.php?q=d] Uncaught PDOException: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '\" THEN 0 ELSE 1 END,
+        station_name ASC
+     LIMIT 8' at line 7 in /Applications/XAMPP/xamppfiles/htdocs/railway_core_system/api/get_stations.php:34
+Stack trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/railway_core_system/api/get_stations.php(34): PDO->prepare('SELECT station_...')
+#1 Command line code(1): include('/Applications/X...')
+#2 {main}
+  thrown in /Applications/XAMPP/xamppfiles/htdocs/railway_core_system/api/get_stations.php:34
+[09-Apr-2026 22:13:56 Europe/Berlin] [request_id=a24934cdea7551bd] [unhandled_exception] [GET /api/get_stations.php?q=de] SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '\" THEN 0 ELSE 1 END,
+        station_name ASC
+     LIMIT 8' at line 7 in /Applications/XAMPP/xamppfiles/htdocs/railway_core_system/api/get_stations.php:34 #0 /Applications/XAMPP/xamppfiles/htdocs/railway_core_system/api/get_stations.php(34): PDO->prepare('SELECT station_...')
+#1 {main}
+[09-Apr-2026 22:17:23 Europe/Berlin] PHP Fatal error:  Uncaught ApiException: Travel date is required. in /Applications/XAMPP/xamppfiles/htdocs/railway_core_system/api/helpers.php:418
+Stack trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/railway_core_system/api/search_trains.php(22): ensure(false, 'Travel date is ...')
+#1 Command line code(1): include('/Applications/X...')
+#2 {main}
+  thrown in /Applications/XAMPP/xamppfiles/htdocs/railway_core_system/api/helpers.php on line 418
+[09-Apr-2026 22:17:23 Europe/Berlin] [request_id=47309fcac524f1bb] [fatal] [POST /api/search_trains.php] Uncaught ApiException: Travel date is required. in /Applications/XAMPP/xamppfiles/htdocs/railway_core_system/api/helpers.php:418
+Stack trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/railway_core_system/api/search_trains.php(22): ensure(false, 'Travel date is ...')
+#1 Command line code(1): include('/Applications/X...')
+#2 {main}
+  thrown in /Applications/XAMPP/xamppfiles/htdocs/railway_core_system/api/helpers.php:418
+[09-Apr-2026 22:17:24 Europe/Berlin] PHP Fatal error:  Uncaught ApiException: Request body is required. in /Applications/XAMPP/xamppfiles/htdocs/railway_core_system/api/helpers.php:418
+Stack trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/railway_core_system/api/login.php(11): ensure(false, 'Request body is...')
+#1 Command line code(1): include('/Applications/X...')
+#2 {main}
+  thrown in /Applications/XAMPP/xamppfiles/htdocs/railway_core_system/api/helpers.php on line 418
+[09-Apr-2026 22:17:24 Europe/Berlin] [request_id=b4cd46bf7cc4e0fa] [fatal] [POST /api/login.php] Uncaught ApiException: Request body is required. in /Applications/XAMPP/xamppfiles/htdocs/railway_core_system/api/helpers.php:418
+Stack trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/railway_core_system/api/login.php(11): ensure(false, 'Request body is...')
+#1 Command line code(1): include('/Applications/X...')
+#2 {main}
+  thrown in /Applications/XAMPP/xamppfiles/htdocs/railway_core_system/api/helpers.php:418
+[22-Apr-2026 12:27:32 Europe/Berlin] Unhandled API exception: require_once(/Applications/XAMPP/xamppfiles/htdocs/railway_core_system/api/admin/../../admin/analytics_functions.php): Failed to open stream: No such file or directory in /Applications/XAMPP/xamppfiles/htdocs/railway_core_system/api/admin/analytics.php:6 #0 /Applications/XAMPP/xamppfiles/htdocs/railway_core_system/api/admin/analytics.php(6): {closure}(2, 'require_once(/A...', '/Applications/X...', 6)
+#1 /Applications/XAMPP/xamppfiles/htdocs/railway_core_system/api/admin/analytics.php(6): require_once()
+#2 {main}
+[22-Apr-2026 12:29:59 Europe/Berlin] Unhandled API exception: require_once(/Applications/XAMPP/xamppfiles/htdocs/railway_core_system/api/admin/../../admin/analytics_functions.php): Failed to open stream: No such file or directory in /Applications/XAMPP/xamppfiles/htdocs/railway_core_system/api/admin/analytics.php:6 #0 /Applications/XAMPP/xamppfiles/htdocs/railway_core_system/api/admin/analytics.php(6): {closure}(2, 'require_once(/A...', '/Applications/X...', 6)
+#1 /Applications/XAMPP/xamppfiles/htdocs/railway_core_system/api/admin/analytics.php(6): require_once()
+#2 {main}
+[22-Apr-2026 12:30:00 Europe/Berlin] Unhandled API exception: require_once(/Applications/XAMPP/xamppfiles/htdocs/railway_core_system/api/admin/../../admin/analytics_functions.php): Failed to open stream: No such file or directory in /Applications/XAMPP/xamppfiles/htdocs/railway_core_system/api/admin/analytics.php:6 #0 /Applications/XAMPP/xamppfiles/htdocs/railway_core_system/api/admin/analytics.php(6): {closure}(2, 'require_once(/A...', '/Applications/X...', 6)
+#1 /Applications/XAMPP/xamppfiles/htdocs/railway_core_system/api/admin/analytics.php(6): require_once()
+#2 {main}
+[22-Apr-2026 12:31:10 Europe/Berlin] Unhandled API exception: require_once(/Applications/XAMPP/xamppfiles/htdocs/railway_core_system/api/admin/../../admin/analytics_functions.php): Failed to open stream: No such file or directory in /Applications/XAMPP/xamppfiles/htdocs/railway_core_system/api/admin/analytics.php:6 #0 /Applications/XAMPP/xamppfiles/htdocs/railway_core_system/api/admin/analytics.php(6): {closure}(2, 'require_once(/A...', '/Applications/X...', 6)
+#1 /Applications/XAMPP/xamppfiles/htdocs/railway_core_system/api/admin/analytics.php(6): require_once()
+#2 {main}
+[22-Apr-2026 12:31:11 Europe/Berlin] Unhandled API exception: require_once(/Applications/XAMPP/xamppfiles/htdocs/railway_core_system/api/admin/../../admin/analytics_functions.php): Failed to open stream: No such file or directory in /Applications/XAMPP/xamppfiles/htdocs/railway_core_system/api/admin/analytics.php:6 #0 /Applications/XAMPP/xamppfiles/htdocs/railway_core_system/api/admin/analytics.php(6): {closure}(2, 'require_once(/A...', '/Applications/X...', 6)
+#1 /Applications/XAMPP/xamppfiles/htdocs/railway_core_system/api/admin/analytics.php(6): require_once()
+#2 {main}
+[2026-04-22T12:36:34+02:00] [db:connection] SQLSTATE[HY000] [2002] Connection refused in /Applications/XAMPP/xamppfiles/htdocs/railway_core_system/config/db.php:25 #0 /Applications/XAMPP/xamppfiles/htdocs/railway_core_system/config/db.php(25): PDO->__construct('mysql:host=127....', 'root', Object(SensitiveParameterValue), Array)
+#1 /Applications/XAMPP/xamppfiles/htdocs/railway_core_system/config/db.php(78): createPdoConnection('mysql:host=127....')
+#2 /Applications/XAMPP/xamppfiles/htdocs/railway_core_system/api/helpers.php(818): getPDO()
+#3 /Applications/XAMPP/xamppfiles/htdocs/railway_core_system/api/helpers.php(831): currentUser()
+#4 /Applications/XAMPP/xamppfiles/htdocs/railway_core_system/api/helpers.php(839): requireLogin()
+#5 /Applications/XAMPP/xamppfiles/htdocs/railway_core_system/api/admin/session.php(9): requireAdmin()
+#6 {main}
+[22-Apr-2026 12:36:34 Europe/Berlin] Unhandled API exception: Database connection failed. Verify that MySQL is running and that config/db.php credentials are correct. in /Applications/XAMPP/xamppfiles/htdocs/railway_core_system/config/db.php:87 #0 /Applications/XAMPP/xamppfiles/htdocs/railway_core_system/api/helpers.php(818): getPDO()
+#1 /Applications/XAMPP/xamppfiles/htdocs/railway_core_system/api/helpers.php(831): currentUser()
+#2 /Applications/XAMPP/xamppfiles/htdocs/railway_core_system/api/helpers.php(839): requireLogin()
+#3 /Applications/XAMPP/xamppfiles/htdocs/railway_core_system/api/admin/session.php(9): requireAdmin()
+#4 {main}
+[2026-04-22T12:36:44+02:00] [db:connection] SQLSTATE[HY000] [2002] Connection refused in /Applications/XAMPP/xamppfiles/htdocs/railway_core_system/config/db.php:25 #0 /Applications/XAMPP/xamppfiles/htdocs/railway_core_system/config/db.php(25): PDO->__construct('mysql:host=127....', 'root', Object(SensitiveParameterValue), Array)
+#1 /Applications/XAMPP/xamppfiles/htdocs/railway_core_system/config/db.php(78): createPdoConnection('mysql:host=127....')
+#2 /Applications/XAMPP/xamppfiles/htdocs/railway_core_system/api/helpers.php(818): getPDO()
+#3 /Applications/XAMPP/xamppfiles/htdocs/railway_core_system/api/helpers.php(831): currentUser()
+#4 /Applications/XAMPP/xamppfiles/htdocs/railway_core_system/api/helpers.php(839): requireLogin()
+#5 /Applications/XAMPP/xamppfiles/htdocs/railway_core_system/api/admin/session.php(9): requireAdmin()
+#6 {main}
+[22-Apr-2026 12:36:44 Europe/Berlin] Unhandled API exception: Database connection failed. Verify that MySQL is running and that config/db.php credentials are correct. in /Applications/XAMPP/xamppfiles/htdocs/railway_core_system/config/db.php:87 #0 /Applications/XAMPP/xamppfiles/htdocs/railway_core_system/api/helpers.php(818): getPDO()
+#1 /Applications/XAMPP/xamppfiles/htdocs/railway_core_system/api/helpers.php(831): currentUser()
+#2 /Applications/XAMPP/xamppfiles/htdocs/railway_core_system/api/helpers.php(839): requireLogin()
+#3 /Applications/XAMPP/xamppfiles/htdocs/railway_core_system/api/admin/session.php(9): requireAdmin()
+#4 {main}
+[2026-04-22T12:36:44+02:00] [db:connection] SQLSTATE[HY000] [2002] Connection refused in /Applications/XAMPP/xamppfiles/htdocs/railway_core_system/config/db.php:25 #0 /Applications/XAMPP/xamppfiles/htdocs/railway_core_system/config/db.php(25): PDO->__construct('mysql:host=127....', 'root', Object(SensitiveParameterValue), Array)
+#1 /Applications/XAMPP/xamppfiles/htdocs/railway_core_system/config/db.php(78): createPdoConnection('mysql:host=127....')
+#2 /Applications/XAMPP/xamppfiles/htdocs/railway_core_system/api/helpers.php(818): getPDO()
+#3 /Applications/XAMPP/xamppfiles/htdocs/railway_core_system/api/helpers.php(831): currentUser()
+#4 /Applications/XAMPP/xamppfiles/htdocs/railway_core_system/api/helpers.php(839): requireLogin()
+#5 /Applications/XAMPP/xamppfiles/htdocs/railway_core_system/api/admin/session.php(9): requireAdmin()
+#6 {main}
+[22-Apr-2026 12:36:44 Europe/Berlin] Unhandled API exception: Database connection failed. Verify that MySQL is running and that config/db.php credentials are correct. in /Applications/XAMPP/xamppfiles/htdocs/railway_core_system/config/db.php:87 #0 /Applications/XAMPP/xamppfiles/htdocs/railway_core_system/api/helpers.php(818): getPDO()
+#1 /Applications/XAMPP/xamppfiles/htdocs/railway_core_system/api/helpers.php(831): currentUser()
+#2 /Applications/XAMPP/xamppfiles/htdocs/railway_core_system/api/helpers.php(839): requireLogin()
+#3 /Applications/XAMPP/xamppfiles/htdocs/railway_core_system/api/admin/session.php(9): requireAdmin()
+#4 {main}
+[2026-04-22T12:36:45+02:00] [db:connection] SQLSTATE[HY000] [2002] Connection refused in /Applications/XAMPP/xamppfiles/htdocs/railway_core_system/config/db.php:25 #0 /Applications/XAMPP/xamppfiles/htdocs/railway_core_system/config/db.php(25): PDO->__construct('mysql:host=127....', 'root', Object(SensitiveParameterValue), Array)
+#1 /Applications/XAMPP/xamppfiles/htdocs/railway_core_system/config/db.php(78): createPdoConnection('mysql:host=127....')
+#2 /Applications/XAMPP/xamppfiles/htdocs/railway_core_system/api/helpers.php(818): getPDO()
+#3 /Applications/XAMPP/xamppfiles/htdocs/railway_core_system/api/helpers.php(831): currentUser()
+#4 /Applications/XAMPP/xamppfiles/htdocs/railway_core_system/api/helpers.php(839): requireLogin()
+#5 /Applications/XAMPP/xamppfiles/htdocs/railway_core_system/api/admin/session.php(9): requireAdmin()
+#6 {main}
+[22-Apr-2026 12:36:45 Europe/Berlin] Unhandled API exception: Database connection failed. Verify that MySQL is running and that config/db.php credentials are correct. in /Applications/XAMPP/xamppfiles/htdocs/railway_core_system/config/db.php:87 #0 /Applications/XAMPP/xamppfiles/htdocs/railway_core_system/api/helpers.php(818): getPDO()
+#1 /Applications/XAMPP/xamppfiles/htdocs/railway_core_system/api/helpers.php(831): currentUser()
+#2 /Applications/XAMPP/xamppfiles/htdocs/railway_core_system/api/helpers.php(839): requireLogin()
+#3 /Applications/XAMPP/xamppfiles/htdocs/railway_core_system/api/admin/session.php(9): requireAdmin()
+#4 {main}
+[22-Apr-2026 12:37:10 Europe/Berlin] PHP Fatal error:  Unparenthesized `a ? b : c ? d : e` is not supported. Use either `(a ? b : c) ? d : e` or `a ? b : (c ? d : e)` in /Applications/XAMPP/xamppfiles/htdocs/railway_core_system/admin/analytics_functions.php on line 435
+[22-Apr-2026 12:37:10 Europe/Berlin] Fatal API error: Unparenthesized `a ? b : c ? d : e` is not supported. Use either `(a ? b : c) ? d : e` or `a ? b : (c ? d : e)` in /Applications/XAMPP/xamppfiles/htdocs/railway_core_system/admin/analytics_functions.php:435
+[22-Apr-2026 12:37:11 Europe/Berlin] PHP Fatal error:  Unparenthesized `a ? b : c ? d : e` is not supported. Use either `(a ? b : c) ? d : e` or `a ? b : (c ? d : e)` in /Applications/XAMPP/xamppfiles/htdocs/railway_core_system/admin/analytics_functions.php on line 435
+[22-Apr-2026 12:37:11 Europe/Berlin] Fatal API error: Unparenthesized `a ? b : c ? d : e` is not supported. Use either `(a ? b : c) ? d : e` or `a ? b : (c ? d : e)` in /Applications/XAMPP/xamppfiles/htdocs/railway_core_system/admin/analytics_functions.php:435
+[22-Apr-2026 12:37:23 Europe/Berlin] PHP Fatal error:  Unparenthesized `a ? b : c ? d : e` is not supported. Use either `(a ? b : c) ? d : e` or `a ? b : (c ? d : e)` in /Applications/XAMPP/xamppfiles/htdocs/railway_core_system/admin/analytics_functions.php on line 442
+[22-Apr-2026 12:37:23 Europe/Berlin] Fatal API error: Unparenthesized `a ? b : c ? d : e` is not supported. Use either `(a ? b : c) ? d : e` or `a ? b : (c ? d : e)` in /Applications/XAMPP/xamppfiles/htdocs/railway_core_system/admin/analytics_functions.php:442
+[22-Apr-2026 12:37:24 Europe/Berlin] PHP Fatal error:  Unparenthesized `a ? b : c ? d : e` is not supported. Use either `(a ? b : c) ? d : e` or `a ? b : (c ? d : e)` in /Applications/XAMPP/xamppfiles/htdocs/railway_core_system/admin/analytics_functions.php on line 442
+[22-Apr-2026 12:37:24 Europe/Berlin] Fatal API error: Unparenthesized `a ? b : c ? d : e` is not supported. Use either `(a ? b : c) ? d : e` or `a ? b : (c ? d : e)` in /Applications/XAMPP/xamppfiles/htdocs/railway_core_system/admin/analytics_functions.php:442
+[2026-04-22T13:33:49+02:00] [db:connection] SQLSTATE[HY000] [2002] Connection refused in /Applications/XAMPP/xamppfiles/htdocs/railway_core_system/config/db.php:25 #0 /Applications/XAMPP/xamppfiles/htdocs/railway_core_system/config/db.php(25): PDO->__construct('mysql:host=127....', 'root', Object(SensitiveParameterValue), Array)
+#1 /Applications/XAMPP/xamppfiles/htdocs/railway_core_system/config/db.php(78): createPdoConnection('mysql:host=127....')
+#2 /Applications/XAMPP/xamppfiles/htdocs/railway_core_system/api/helpers.php(818): getPDO()
+#3 /Applications/XAMPP/xamppfiles/htdocs/railway_core_system/api/helpers.php(831): currentUser()
+#4 /Applications/XAMPP/xamppfiles/htdocs/railway_core_system/api/helpers.php(839): requireLogin()
+#5 /Applications/XAMPP/xamppfiles/htdocs/railway_core_system/api/admin/session.php(9): requireAdmin()
+#6 {main}
+[22-Apr-2026 13:33:49 Europe/Berlin] Unhandled API exception: Database connection failed. Verify that MySQL is running and that config/db.php credentials are correct. in /Applications/XAMPP/xamppfiles/htdocs/railway_core_system/config/db.php:87 #0 /Applications/XAMPP/xamppfiles/htdocs/railway_core_system/api/helpers.php(818): getPDO()
+#1 /Applications/XAMPP/xamppfiles/htdocs/railway_core_system/api/helpers.php(831): currentUser()
+#2 /Applications/XAMPP/xamppfiles/htdocs/railway_core_system/api/helpers.php(839): requireLogin()
+#3 /Applications/XAMPP/xamppfiles/htdocs/railway_core_system/api/admin/session.php(9): requireAdmin()
+#4 {main}
+[22-Apr-2026 19:08:03 Europe/Berlin] Unhandled API exception: session_start(): open(/Applications/XAMPP/xamppfiles/temp//sess_fv7lvro1vgk5uu47u0jm7l24vh, O_RDWR) failed: Permission denied (13) in /Applications/XAMPP/xamppfiles/htdocs/railway_core_system/api/helpers.php:412 #0 [internal function]: {closure}(2, 'session_start()...', '/Applications/X...', 412)
+#1 /Applications/XAMPP/xamppfiles/htdocs/railway_core_system/api/helpers.php(412): session_start()
+#2 /Applications/XAMPP/xamppfiles/htdocs/railway_core_system/api/helpers.php(811): startSessionIfNeeded()
+#3 /Applications/XAMPP/xamppfiles/htdocs/railway_core_system/api/session.php(10): currentUser()
+#4 {main}
+[22-Apr-2026 19:08:13 Europe/Berlin] Unhandled API exception: session_start(): open(/Applications/XAMPP/xamppfiles/temp//sess_fv7lvro1vgk5uu47u0jm7l24vh, O_RDWR) failed: Permission denied (13) in /Applications/XAMPP/xamppfiles/htdocs/railway_core_system/api/helpers.php:412 #0 [internal function]: {closure}(2, 'session_start()...', '/Applications/X...', 412)
+#1 /Applications/XAMPP/xamppfiles/htdocs/railway_core_system/api/helpers.php(412): session_start()
+#2 /Applications/XAMPP/xamppfiles/htdocs/railway_core_system/api/helpers.php(783): startSessionIfNeeded()
+#3 /Applications/XAMPP/xamppfiles/htdocs/railway_core_system/api/login.php(34): setAuthenticatedUser(Array)
+#4 {main}
+[22-Apr-2026 19:08:25 Europe/Berlin] Unhandled API exception: session_start(): open(/Applications/XAMPP/xamppfiles/temp//sess_fv7lvro1vgk5uu47u0jm7l24vh, O_RDWR) failed: Permission denied (13) in /Applications/XAMPP/xamppfiles/htdocs/railway_core_system/api/helpers.php:412 #0 [internal function]: {closure}(2, 'session_start()...', '/Applications/X...', 412)
+#1 /Applications/XAMPP/xamppfiles/htdocs/railway_core_system/api/helpers.php(412): session_start()
+#2 /Applications/XAMPP/xamppfiles/htdocs/railway_core_system/api/helpers.php(783): startSessionIfNeeded()
+#3 /Applications/XAMPP/xamppfiles/htdocs/railway_core_system/api/login.php(34): setAuthenticatedUser(Array)
+#4 {main}
+[22-Apr-2026 19:08:57 Europe/Berlin] Unhandled API exception: session_start(): open(/Applications/XAMPP/xamppfiles/temp//sess_fv7lvro1vgk5uu47u0jm7l24vh, O_RDWR) failed: Permission denied (13) in /Applications/XAMPP/xamppfiles/htdocs/railway_core_system/api/helpers.php:412 #0 [internal function]: {closure}(2, 'session_start()...', '/Applications/X...', 412)
+#1 /Applications/XAMPP/xamppfiles/htdocs/railway_core_system/api/helpers.php(412): session_start()
+#2 /Applications/XAMPP/xamppfiles/htdocs/railway_core_system/api/helpers.php(783): startSessionIfNeeded()
+#3 /Applications/XAMPP/xamppfiles/htdocs/railway_core_system/api/login.php(34): setAuthenticatedUser(Array)
+#4 {main}
+[22-Apr-2026 19:09:04 Europe/Berlin] Unhandled API exception: session_start(): open(/Applications/XAMPP/xamppfiles/temp//sess_fv7lvro1vgk5uu47u0jm7l24vh, O_RDWR) failed: Permission denied (13) in /Applications/XAMPP/xamppfiles/htdocs/railway_core_system/api/helpers.php:412 #0 [internal function]: {closure}(2, 'session_start()...', '/Applications/X...', 412)
+#1 /Applications/XAMPP/xamppfiles/htdocs/railway_core_system/api/helpers.php(412): session_start()
+#2 /Applications/XAMPP/xamppfiles/htdocs/railway_core_system/api/helpers.php(783): startSessionIfNeeded()
+#3 /Applications/XAMPP/xamppfiles/htdocs/railway_core_system/api/login.php(34): setAuthenticatedUser(Array)
+#4 {main}
